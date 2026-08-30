@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Servitech Solution Lab - Servicios Informáticos Profesionales">
+<meta name="keywords" content="servicios informáticos, reparación, redes, desarrollo web, ciberseguridad">
+<meta name="author" content="Servitech Solution Lab">
+<title>Servitech Solution Lab | Servicios Informáticos Profesionales</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+:root{--black:#0a0a0a;--dark:#111111;--darker:#0d0d0d;--red:#e50914;--red-light:#ff1a25;--red-dark:#b20710;--red-glow:rgba(229,9,20,0.4);--white:#ffffff;--gray:#888888;--gray-light:#cccccc;--gray-dark:#333333;--card-bg:#1a1a1a;--border:#2a2a2a}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Rajdhani',sans-serif;background:var(--black);color:var(--white);overflow-x:hidden}
+::-webkit-scrollbar{width:8px}
+::-webkit-scrollbar-track{background:var(--dark)}
+::-webkit-scrollbar-thumb{background:var(--red);border-radius:4px}
+::-webkit-scrollbar-thumb:hover{background:var(--red-light)}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 var(--red-glow)}50%{box-shadow:0 0 20px 10px var(--red-glow)}}
+@keyframes glow{0%,100%{text-shadow:0 0 10px var(--red-glow),0 0 20px var(--red-glow)}50%{text-shadow:0 0 20px var(--red-glow),0 0 40px var(--red-glow)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes slideInLeft{from{opacity:0;transform:translateX(-60px)}to{opacity:1;transform:translateX(0)}}
+@keyframes slideInRight{from{opacity:0;transform:translateX(60px)}to{opacity:1;transform:translateX(0)}}
+.animate{opacity:0}
+.animate.visible{animation:fadeInUp 0.8s ease forwards}
+.animate-left.visible{animation:slideInLeft 0.8s ease forwards}
+.animate-right.visible{animation:slideInRight 0.8s ease forwards}
+.navbar{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(10,10,10,0.95);backdrop-filter:blur(15px);border-bottom:1px solid var(--border);padding:0 5%;display:flex;justify-content:space-between;align-items:center;height:70px;transition:all 0.3s ease}
+.navbar.scrolled{background:rgba(10,10,10,0.98);box-shadow:0 5px 30px rgba(229,9,20,0.15)}
+.logo{font-family:'Orbitron',sans-serif;font-size:1.4rem;font-weight:900;color:var(--white);text-decoration:none;display:flex;align-items:center;gap:10px}
+.logo i{color:var(--red);font-size:1.6rem}
+.logo span{color:var(--red)}
+.nav-links{display:flex;list-style:none;gap:35px;align-items:center}
+.nav-links a{color:var(--gray-light);text-decoration:none;font-weight:600;font-size:1rem;text-transform:uppercase;letter-spacing:1px;position:relative;transition:color 0.3s}
+.nav-links a::after{content:'';position:absolute;bottom:-5px;left:0;width:0;height:2px;background:var(--red);transition:width 0.3s}
+.nav-links a:hover{color:var(--red)}
+.nav-links a:hover::after{width:100%}
+.cart-btn{position:relative;background:var(--red);color:var(--white);border:none;padding:10px 20px;border-radius:8px;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1rem;cursor:pointer;display:flex;align-items:center;gap:8px;transition:all 0.3s}
+.cart-btn:hover{background:var(--red-light);transform:scale(1.05);box-shadow:0 0 20px var(--red-glow)}
+.cart-count{position:absolute;top:-8px;right:-8px;background:var(--white);color:var(--red);font-size:0.75rem;font-weight:900;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.mobile-menu-btn{display:none;background:none;border:none;color:var(--white);font-size:1.5rem;cursor:pointer}
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:100px 5% 60px;position:relative;overflow:hidden;background:linear-gradient(135deg,var(--black) 0%,var(--dark) 50%,#1a0505 100%)}
+.hero::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(circle at 20% 80%,rgba(229,9,20,0.08) 0%,transparent 50%),radial-gradient(circle at 80% 20%,rgba(229,9,20,0.05) 0%,transparent 50%);pointer-events:none}
+.hero-content{position:relative;z-index:2;max-width:900px}
+.hero-badge{display:inline-block;background:rgba(229,9,20,0.15);border:1px solid var(--red-dark);color:var(--red-light);padding:8px 25px;border-radius:50px;font-weight:600;font-size:0.9rem;letter-spacing:2px;text-transform:uppercase;margin-bottom:25px;animation:fadeInUp 0.8s ease}
+.hero h1{font-family:'Orbitron',sans-serif;font-size:3.5rem;font-weight:900;line-height:1.2;margin-bottom:20px;animation:fadeInUp 0.8s ease 0.2s both}
+.hero h1 span{color:var(--red);animation:glow 3s ease infinite}
+.hero p{font-size:1.3rem;color:var(--gray);margin-bottom:40px;line-height:1.7;animation:fadeInUp 0.8s ease 0.4s both}
+.hero-btns{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;animation:fadeInUp 0.8s ease 0.6s both}
+.btn-primary{background:var(--red);color:var(--white);padding:15px 40px;border-radius:10px;text-decoration:none;font-weight:700;font-size:1.1rem;text-transform:uppercase;letter-spacing:1px;border:2px solid var(--red);transition:all 0.3s;display:inline-flex;align-items:center;gap:10px}
+.btn-primary:hover{background:transparent;color:var(--red);box-shadow:0 0 30px var(--red-glow);transform:translateY(-3px)}
+.btn-secondary{background:transparent;color:var(--white);padding:15px 40px;border-radius:10px;text-decoration:none;font-weight:700;font-size:1.1rem;text-transform:uppercase;letter-spacing:1px;border:2px solid var(--gray-dark);transition:all 0.3s;display:inline-flex;align-items:center;gap:10px}
+.btn-secondary:hover{border-color:var(--red);color:var(--red);transform:translateY(-3px)}
+.hero-stats{display:flex;justify-content:center;gap:60px;margin-top:60px;animation:fadeInUp 0.8s ease 0.8s both}
+.stat-item h3{font-family:'Orbitron',sans-serif;font-size:2.5rem;color:var(--red)}
+.stat-item p{color:var(--gray);font-size:0.95rem;text-transform:uppercase;letter-spacing:1px}
+.section{padding:100px 5%;position:relative}
+.section-title{text-align:center;margin-bottom:60px}
+.section-title h2{font-family:'Orbitron',sans-serif;font-size:2.5rem;font-weight:900;margin-bottom:15px}
+.section-title h2 span{color:var(--red)}
+.section-title p{color:var(--gray);font-size:1.1rem;max-width:600px;margin:0 auto}
+.section-title .line{width:80px;height:3px;background:var(--red);margin:20px auto 0;border-radius:2px}
+.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:30px;max-width:1400px;margin:0 auto}
+.service-card{background:var(--card-bg);border:1px solid var(--border);border-radius:16px;overflow:hidden;transition:all 0.4s ease;position:relative}
+.service-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--red);transform:scaleX(0);transition:transform 0.4s}
+.service-card:hover::before{transform:scaleX(1)}
+.service-card:hover{transform:translateY(-10px);border-color:var(--red-dark);box-shadow:0 20px 50px rgba(229,9,20,0.15)}
+.service-img{width:100%;height:220px;object-fit:cover;transition:transform 0.4s}
+.service-card:hover .service-img{transform:scale(1.05)}
+.service-content{padding:25px}
+.service-content h3{font-family:'Orbitron',sans-serif;font-size:1.3rem;margin-bottom:10px;color:var(--white)}
+.service-content p{color:var(--gray);font-size:0.95rem;line-height:1.6;margin-bottom:15px}
+.service-price{font-family:'Orbitron',sans-serif;font-size:1.6rem;color:var(--red);font-weight:900;margin-bottom:15px}
+.service-price span{font-size:0.9rem;color:var(--gray);font-weight:400}
+.add-to-cart{width:100%;background:var(--red);color:var(--white);border:none;padding:14px;border-radius:10px;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1rem;text-transform:uppercase;letter-spacing:1px;cursor:pointer;transition:all 0.3s;display:flex;align-items:center;justify-content:center;gap:10px}
+.add-to-cart:hover{background:var(--red-light);box-shadow:0 0 25px var(--red-glow)}
+.add-to-cart.added{background:#22c55e}
+.mission-vision{background:linear-gradient(180deg,var(--dark) 0%,var(--darker) 100%)}
+.mv-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(400px,1fr));gap:40px;max-width:1200px;margin:0 auto}
+.mv-card{background:var(--card-bg);border:1px solid var(--border);border-radius:20px;padding:50px 40px;text-align:center;position:relative;overflow:hidden;transition:all 0.4s}
+.mv-card::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(229,9,20,0.05) 0%,transparent 70%);pointer-events:none}
+.mv-card:hover{border-color:var(--red-dark);transform:translateY(-5px);box-shadow:0 15px 40px rgba(229,9,20,0.1)}
+.mv-icon{width:80px;height:80px;background:rgba(229,9,20,0.1);border:2px solid var(--red-dark);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 25px;font-size:2rem;color:var(--red)}
+.mv-card h3{font-family:'Orbitron',sans-serif;font-size:1.5rem;margin-bottom:20px}
+.mv-card p{color:var(--gray);line-height:1.8;font-size:1.05rem}
+.testimonials{background:var(--black)}
+.testimonials-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:25px;max-width:1400px;margin:0 auto}
+.testimonial-card{background:var(--card-bg);border:1px solid var(--border);border-radius:16px;padding:30px;position:relative;transition:all 0.3s}
+.testimonial-card:hover{border-color:var(--red-dark);transform:translateY(-5px)}
+.testimonial-card::before{content:'"';position:absolute;top:10px;right:20px;font-size:4rem;color:var(--red);opacity:0.2;font-family:serif}
+.stars{color:#fbbf24;margin-bottom:15px;font-size:0.9rem}
+.testimonial-text{color:var(--gray-light);line-height:1.7;margin-bottom:20px;font-size:0.95rem}
+.testimonial-author{display:flex;align-items:center;gap:15px}
+.author-avatar{width:50px;height:50px;border-radius:50%;background:linear-gradient(135deg,var(--red),var(--red-dark));display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1.2rem;color:var(--white)}
+.author-info h4{font-size:1rem;color:var(--white)}
+.author-info p{font-size:0.85rem;color:var(--gray)}
+.contact-section{background:linear-gradient(180deg,var(--darker) 0%,var(--dark) 100%)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;max-width:1200px;margin:0 auto;align-items:start}
+.contact-info h3{font-family:'Orbitron',sans-serif;font-size:1.8rem;margin-bottom:20px}
+.contact-info p{color:var(--gray);line-height:1.8;margin-bottom:30px}
+.contact-item{display:flex;align-items:center;gap:15px;margin-bottom:20px;padding:15px 20px;background:var(--card-bg);border-radius:12px;border:1px solid var(--border);transition:all 0.3s}
+.contact-item:hover{border-color:var(--red-dark);transform:translateX(5px)}
+.contact-item i{width:45px;height:45px;background:rgba(229,9,20,0.1);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--red);font-size:1.1rem}
+.contact-item div h4{font-size:0.9rem;color:var(--gray);margin-bottom:3px}
+.contact-item div p{font-size:1rem;color:var(--white);font-weight:600}
+.contact-form{background:var(--card-bg);border:1px solid var(--border);border-radius:20px;padding:40px}
+.form-group{margin-bottom:20px}
+.form-group label{display:block;margin-bottom:8px;font-weight:600;color:var(--gray-light);font-size:0.95rem}
+.form-group input,.form-group textarea,.form-group select{width:100%;padding:14px 18px;background:var(--dark);border:1px solid var(--gray-dark);border-radius:10px;color:var(--white);font-family:'Rajdhani',sans-serif;font-size:1rem;transition:all 0.3s}
+.form-group input:focus,.form-group textarea:focus,.form-group select:focus{outline:none;border-color:var(--red);box-shadow:0 0 15px rgba(229,9,20,0.1)}
+.form-group input::placeholder,.form-group textarea::placeholder{color:var(--gray-dark)}
+.form-group textarea{min-height:120px;resize:vertical}
+.submit-btn{width:100%;background:var(--red);color:var(--white);border:none;padding:16px;border-radius:10px;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.1rem;text-transform:uppercase;letter-spacing:1px;cursor:pointer;transition:all 0.3s}
+.submit-btn:hover{background:var(--red-light);box-shadow:0 0 30px var(--red-glow);transform:translateY(-2px)}
+.cart-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.8);z-index:2000;opacity:0;visibility:hidden;transition:all 0.3s}
+.cart-overlay.active{opacity:1;visibility:visible}
+.cart-sidebar{position:fixed;top:0;right:-450px;width:450px;max-width:100%;height:100vh;background:var(--dark);border-left:1px solid var(--border);z-index:2001;transition:right 0.4s ease;display:flex;flex-direction:column}
+.cart-sidebar.active{right:0}
+.cart-header{padding:25px 30px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+.cart-header h3{font-family:'Orbitron',sans-serif;font-size:1.3rem;display:flex;align-items:center;gap:10px}
+.cart-header h3 i{color:var(--red)}
+.close-cart{background:none;border:none;color:var(--gray);font-size:1.5rem;cursor:pointer;transition:color 0.3s}
+.close-cart:hover{color:var(--red)}
+.cart-items{flex:1;overflow-y:auto;padding:20px 30px}
+.cart-empty{text-align:center;padding:60px 20px;color:var(--gray)}
+.cart-empty i{font-size:4rem;color:var(--gray-dark);margin-bottom:20px}
+.cart-item{display:flex;gap:15px;padding:15px;background:var(--card-bg);border-radius:12px;margin-bottom:15px;border:1px solid var(--border);align-items:center}
+.cart-item img{width:70px;height:70px;object-fit:cover;border-radius:8px}
+.cart-item-info{flex:1}
+.cart-item-info h4{font-size:0.95rem;margin-bottom:5px}
+.cart-item-info p{color:var(--red);font-weight:700;font-size:0.95rem}
+.remove-item{background:none;border:none;color:var(--gray);font-size:1.1rem;cursor:pointer;padding:5px;transition:color 0.3s}
+.remove-item:hover{color:var(--red)}
+.cart-footer{padding:25px 30px;border-top:1px solid var(--border);background:var(--darker)}
+.cart-total{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid var(--border)}
+.cart-total span{color:var(--gray);font-size:1.1rem}
+.cart-total strong{font-family:'Orbitron',sans-serif;font-size:1.5rem;color:var(--red)}
+.checkout-btn{width:100%;background:var(--red);color:var(--white);border:none;padding:16px;border-radius:10px;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.1rem;text-transform:uppercase;letter-spacing:1px;cursor:pointer;transition:all 0.3s;display:flex;align-items:center;justify-content:center;gap:10px}
+.checkout-btn:hover{background:var(--red-light);box-shadow:0 0 30px var(--red-glow)}
+.checkout-btn:disabled{background:var(--gray-dark);cursor:not-allowed;box-shadow:none}
+.checkout-modal{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.9);z-index:3000;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:all 0.3s;padding:20px}
+.checkout-modal.active{opacity:1;visibility:visible}
+.checkout-content{background:var(--dark);border:1px solid var(--border);border-radius:20px;width:100%;max-width:600px;max-height:90vh;overflow-y:auto;padding:40px;position:relative}
+.checkout-content h2{font-family:'Orbitron',sans-serif;font-size:1.5rem;margin-bottom:10px;text-align:center}
+.checkout-content>p{text-align:center;color:var(--gray);margin-bottom:30px}
+.close-checkout{position:absolute;top:20px;right:20px;background:none;border:none;color:var(--gray);font-size:1.5rem;cursor:pointer;transition:color 0.3s}
+.close-checkout:hover{color:var(--red)}
+.order-summary{background:var(--card-bg);border-radius:12px;padding:20px;margin-bottom:25px;border:1px solid var(--border)}
+.order-summary h4{font-family:'Orbitron',sans-serif;font-size:1rem;margin-bottom:15px;color:var(--red)}
+.order-item{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-size:0.95rem}
+.order-item:last-child{border-bottom:none}
+.order-total{display:flex;justify-content:space-between;padding-top:15px;margin-top:10px;border-top:2px solid var(--red-dark);font-weight:700;font-size:1.1rem}
+.order-total span:last-child{color:var(--red);font-family:'Orbitron',sans-serif}
+.required{color:var(--red)}
+.whatsapp-btn{width:100%;background:#25d366;color:var(--white);border:none;padding:16px;border-radius:10px;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.1rem;text-transform:uppercase;letter-spacing:1px;cursor:pointer;transition:all 0.3s;display:flex;align-items:center;justify-content:center;gap:10px;margin-top:20px}
+.whatsapp-btn:hover{background:#128c7e;transform:translateY(-2px);box-shadow:0 5px 20px rgba(37,211,102,0.3)}
+.whatsapp-btn:disabled{background:var(--gray-dark);cursor:not-allowed;box-shadow:none;transform:none}
+.footer{background:var(--darker);border-top:1px solid var(--border);padding:60px 5% 30px}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;max-width:1400px;margin:0 auto 40px}
+.footer-brand h3{font-family:'Orbitron',sans-serif;font-size:1.5rem;margin-bottom:15px}
+.footer-brand h3 span{color:var(--red)}
+.footer-brand p{color:var(--gray);line-height:1.7;margin-bottom:20px}
+.social-links{display:flex;gap:15px}
+.social-links a{width:40px;height:40px;background:var(--card-bg);border:1px solid var(--border);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--gray);text-decoration:none;transition:all 0.3s}
+.social-links a:hover{background:var(--red);color:var(--white);border-color:var(--red);transform:translateY(-3px)}
+.footer-col h4{font-family:'Orbitron',sans-serif;font-size:1rem;margin-bottom:20px;color:var(--white)}
+.footer-col ul{list-style:none}
+.footer-col ul li{margin-bottom:12px}
+.footer-col ul li a{color:var(--gray);text-decoration:none;transition:color 0.3s;font-size:0.95rem}
+.footer-col ul li a:hover{color:var(--red)}
+.footer-bottom{text-align:center;padding-top:30px;border-top:1px solid var(--border);color:var(--gray);font-size:0.9rem}
+.footer-bottom a{color:var(--red);text-decoration:none}
+.toast{position:fixed;bottom:30px;right:30px;background:var(--card-bg);border:1px solid var(--red-dark);border-left:4px solid var(--red);padding:18px 25px;border-radius:12px;display:flex;align-items:center;gap:15px;z-index:4000;transform:translateX(150%);transition:transform 0.4s ease;box-shadow:0 10px 40px rgba(0,0,0,0.5)}
+.toast.show{transform:translateX(0)}
+.toast i{color:var(--red);font-size:1.3rem}
+.toast p{font-weight:600}
+.particles{position:absolute;top:0;left:0;width:100%;height:100%;overflow:hidden;pointer-events:none;z-index:1}
+.particle{position:absolute;width:4px;height:4px;background:var(--red);border-radius:50%;opacity:0.3;animation:float 6s ease-in-out infinite}
+@media(max-width:1024px){.contact-grid{grid-template-columns:1fr}.footer-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:768px){.nav-links{display:none}.mobile-menu-btn{display:block}.hero h1{font-size:2.2rem}.hero-stats{gap:30px;flex-wrap:wrap}.mv-grid{grid-template-columns:1fr}.footer-grid{grid-template-columns:1fr}.cart-sidebar{width:100%}.checkout-content{padding:25px}}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <a href="#" class="logo"><i class="fas fa-microchip"></i>Servitech <span>Solution Lab</span></a>
+  <ul class="nav-links">
+    <li><a href="#inicio">Inicio</a></li>
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#mision">Misión y Visión</a></li>
+    <li><a href="#testimonios">Opiniones</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+    <li><button class="cart-btn" onclick="openCart()"><i class="fas fa-shopping-cart"></i>Carrito<span class="cart-count" id="cartCount">0</span></button></li>
+  </ul>
+  <button class="mobile-menu-btn" onclick="toggleMobileMenu()"><i class="fas fa-bars"></i></button>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="inicio">
+  <div class="particles" id="particles"></div>
+  <div class="hero-content">
+    <div class="hero-badge">Tecnología de Vanguardia</div>
+    <h1>Soluciones Informáticas <span>Profesionales</span></h1>
+    <p>Transformamos tus ideas en realidad digital. Ofrecemos servicios informáticos de alta calidad con resultados garantizados para impulsar tu negocio al siguiente nivel.</p>
+    <div class="hero-btns">
+      <a href="#servicios" class="btn-primary"><i class="fas fa-rocket"></i> Ver Servicios</a>
+      <a href="#contacto" class="btn-secondary"><i class="fas fa-envelope"></i> Contáctanos</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item"><h3>500+</h3><p>Proyectos</p></div>
+      <div class="stat-item"><h3>350+</h3><p>Clientes</p></div>
+      <div class="stat-item"><h3>8+</h3><p>Años de Experiencia</p></div>
+      <div class="stat-item"><h3>99%</h3><p>Satisfacción</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="section" id="servicios">
+  <div class="section-title animate">
+    <h2>Nuestros <span>Servicios</span></h2>
+    <p>Ofrecemos soluciones integrales en tecnología para satisfacer todas tus necesidades informáticas</p>
+    <div class="line"></div>
+  </div>
+  <div class="services-grid" id="servicesGrid"></div>
+</section>
+
+<!-- MISSION & VISION -->
+<section class="section mission-vision" id="mision">
+  <div class="section-title animate">
+    <h2>Misión y <span>Visión</span></h2>
+    <p>Conoce los principios que guían nuestro trabajo diario</p>
+    <div class="line"></div>
+  </div>
+  <div class="mv-grid">
+    <div class="mv-card animate-left">
+      <div class="mv-icon"><i class="fas fa-bullseye"></i></div>
+      <h3>Nuestra Misión</h3>
+      <p>Brindar soluciones tecnológicas innovadoras y de alta calidad que permitan a nuestros clientes optimizar sus procesos, aumentar su productividad y alcanzar sus objetivos empresariales. Nos comprometemos a ofrecer un servicio personalizado, oportuno y eficiente, respaldado por un equipo de profesionales altamente capacitados y apasionados por la tecnología.</p>
+    </div>
+    <div class="mv-card animate-right">
+      <div class="mv-icon"><i class="fas fa-eye"></i></div>
+      <h3>Nuestra Visión</h3>
+      <p>Ser reconocidos como líderes en el mercado de servicios informáticos, siendo la primera opción para empresas y particulares que buscan soluciones tecnológicas confiables y vanguardistas. Aspiramos a expandir nuestra presencia a nivel nacional e internacional, manteniendo siempre los más altos estándares de calidad, innovación y satisfacción del cliente.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section testimonials" id="testimonios">
+  <div class="section-title animate">
+    <h2>Opiniones de <span>Nuestros Clientes</span></h2>
+    <p>Lo que dicen quienes ya confiaron en nosotros</p>
+    <div class="line"></div>
+  </div>
+  <div class="testimonials-grid" id="testimonialsGrid"></div>
+</section>
+
+<!-- CONTACT -->
+<section class="section contact-section" id="contacto">
+  <div class="section-title animate">
+    <h2>Contáct<span>anos</span></h2>
+    <p>Estamos listos para ayudarte. Envíanos tu mensaje y te responderemos a la brevedad.</p>
+    <div class="line"></div>
+  </div>
+  <div class="contact-grid">
+    <div class="contact-info animate-left">
+      <h3>Información de Contacto</h3>
+      <p>Comunícate con nosotros a través de cualquiera de nuestros canales. Estamos disponibles para atenderte y resolver todas tus dudas.</p>
+      <div class="contact-item">
+        <i class="fab fa-whatsapp"></i>
+        <div><h4>WhatsApp Business</h4><p>+53 51549437</p></div>
+      </div>
+      <div class="contact-item">
+        <i class="fas fa-envelope"></i>
+        <div><h4>Correo Electrónico</h4><p>luisdanielramoscorona2010@gmail.com</p></div>
+      </div>
+      <div class="contact-item">
+        <i class="fas fa-clock"></i>
+        <div><h4>Horario de Atención</h4><p>Lunes a Sábado: 8:00 AM - 8:00 PM</p></div>
+      </div>
+      <div class="contact-item">
+        <i class="fas fa-map-marker-alt"></i>
+        <div><h4>Ubicación</h4><p>Cuba - Servicio a Domicilio Disponible</p></div>
+      </div>
+    </div>
+    <div class="contact-form animate-right">
+      <form id="contactForm" onsubmit="handleContactSubmit(event)">
+        <div class="form-group">
+          <label>Nombre Completo <span class="required">*</span></label>
+          <input type="text" id="contactName" placeholder="Ej: Juan Pérez" required>
+        </div>
+        <div class="form-group">
+          <label>Correo Electrónico <span class="required">*</span></label>
+          <input type="email" id="contactEmail" placeholder="Ej: correo@ejemplo.com" required>
+        </div>
+        <div class="form-group">
+          <label>Teléfono <span class="required">*</span></label>
+          <input type="tel" id="contactPhone" placeholder="Ej: +53 5XXXXXXX" required>
+        </div>
+        <div class="form-group">
+          <label>Asunto <span class="required">*</span></label>
+          <select id="contactSubject" required>
+            <option value="">Selecciona un asunto</option>
+            <option value="consulta">Consulta General</option>
+            <option value="soporte">Soporte Técnico</option>
+            <option value="cotizacion">Solicitud de Cotización</option>
+            <option value="sugerencia">Sugerencia</option>
+            <option value="otro">Otro</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Mensaje <span class="required">*</span></label>
+          <textarea id="contactMessage" placeholder="Escribe tu mensaje aquí..." required></textarea>
+        </div>
+        <button type="submit" class="submit-btn"><i class="fas fa-paper-plane"></i> Enviar Mensaje</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <h3>Servitech <span>Solution Lab</span></h3>
+      <p>Soluciones tecnológicas de vanguardia para impulsar tu negocio. Calidad, innovación y compromiso en cada proyecto.</p>
+      <div class="social-links">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-telegram"></i></a>
+        <a href="https://wa.me/5351549437" target="_blank"><i class="fab fa-whatsapp"></i></a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Servicios</h4>
+      <ul>
+        <li><a href="#servicios">Reparación de PC</a></li>
+        <li><a href="#servicios">Redes y Conectividad</a></li>
+        <li><a href="#servicios">Desarrollo Web</a></li>
+        <li><a href="#servicios">Ciberseguridad</a></li>
+        <li><a href="#servicios">Soporte IT</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Empresa</h4>
+      <ul>
+        <li><a href="#mision">Misión y Visión</a></li>
+        <li><a href="#testimonios">Testimonios</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+        <li><a href="#">Política de Privacidad</a></li>
+        <li><a href="#">Términos de Servicio</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contacto</h4>
+      <ul>
+        <li><a href="https://wa.me/5351549437" target="_blank">WhatsApp: +53 51549437</a></li>
+        <li><a href="mailto:luisdanielramoscorona2010@gmail.com">luisdanielramoscorona2010@gmail.com</a></li>
+        <li><a href="#">Cuba</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2026 Servitech Solution Lab. Todos los derechos reservados. | Desarrollado con <i class="fas fa-heart" style="color:var(--red)"></i> por Servitech Solution Lab</p>
+  </div>
+</footer>
+
+<!-- CART SIDEBAR -->
+<div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+<div class="cart-sidebar" id="cartSidebar">
+  <div class="cart-header">
+    <h3><i class="fas fa-shopping-cart"></i> Tu Carrito</h3>
+    <button class="close-cart" onclick="closeCart()"><i class="fas fa-times"></i></button>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <div class="cart-empty">
+      <i class="fas fa-shopping-basket"></i>
+      <p>Tu carrito está vacío</p>
+      <p style="font-size:0.85rem;margin-top:10px">Agrega servicios para comenzar</p>
+    </div>
+  </div>
+  <div class="cart-footer">
+    <div class="cart-total">
+      <span>Total a Pagar:</span>
+      <strong id="cartTotal">$0.00</strong>
+    </div>
+    <button class="checkout-btn" id="checkoutBtn" onclick="openCheckout()" disabled>
+      <i class="fab fa-whatsapp"></i> Finalizar Pedido por WhatsApp
+    </button>
+  </div>
+</div>
+
+<!-- CHECKOUT MODAL -->
+<div class="checkout-modal" id="checkoutModal">
+  <div class="checkout-content">
+    <button class="close-checkout" onclick="closeCheckout()"><i class="fas fa-times"></i></button>
+    <h2><i class="fab fa-whatsapp" style="color:#25d366"></i> Finalizar Pedido</h2>
+    <p>Completa tus datos para enviar el pedido directamente a nuestro WhatsApp Business</p>
+    <div class="order-summary" id="orderSummary"></div>
+    <form id="checkoutForm" onsubmit="sendWhatsAppOrder(event)">
+      <div class="form-group">
+        <label>Nombre Completo <span class="required">*</span></label>
+        <input type="text" id="clientName" placeholder="Ej: María González" required>
+      </div>
+      <div class="form-group">
+        <label>Teléfono de Contacto <span class="required">*</span></label>
+        <input type="tel" id="clientPhone" placeholder="Ej: +53 5XXXXXXX" required>
+      </div>
+      <div class="form-group">
+        <label>Correo Electrónico <span class="required">*</span></label>
+        <input type="email" id="clientEmail" placeholder="Ej: correo@ejemplo.com" required>
+      </div>
+      <div class="form-group">
+        <label>Dirección de Entrega / Ubicación <span class="required">*</span></label>
+        <input type="text" id="clientAddress" placeholder="Ej: Calle 23, Vedado, La Habana" required>
+      </div>
+      <div class="form-group">
+        <label>Método de Pago Preferido <span class="required">*</span></label>
+        <select id="paymentMethod" required>
+          <option value="">Selecciona un método</option>
+          <option value="efectivo">Efectivo</option>
+          <option value="transferencia">Transferencia Bancaria</option>
+          <option value="zelle">Zelle</option>
+          <option value="cripto">Criptomonedas</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Notas Adicionales (Opcional)</label>
+        <textarea id="clientNotes" placeholder="Alguna indicación especial..."></textarea>
+      </div>
+      <button type="submit" class="whatsapp-btn" id="sendOrderBtn">
+        <i class="fab fa-whatsapp"></i> Enviar Pedido por WhatsApp
+      </button>
+    </form>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast">
+  <i class="fas fa-check-circle"></i>
+  <p id="toastMessage">Servicio agregado al carrito</p>
+</div>
+
+<script>
+const services=[
+{id:1,name:"Reparación de Computadoras",description:"Diagnóstico y reparación completa de equipos de escritorio y laptops. Incluye cambio de piezas, limpieza interna, optimización del sistema y garantía de 30 días.",price:25.00,currency:"USD",image:"https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?w=600&h=400&fit=crop"},
+{id:2,name:"Instalación de Redes",description:"Diseño e instalación de redes cableadas e inalámbricas para hogares y empresas. Configuración de routers, switches, access points y cableado estructurado.",price:45.00,currency:"USD",image:"https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=600&h=400&fit=crop"},
+{id:3,name:"Desarrollo Web Profesional",description:"Creación de sitios web modernos, responsivos y optimizados para SEO. Incluye diseño personalizado, panel administrativo, hosting y dominio por un año.",price:150.00,currency:"USD",image:"https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=600&h=400&fit=crop"},
+{id:4,name:"Ciberseguridad Empresarial",description:"Auditoría de seguridad, protección contra malware, firewall, VPN, análisis de vulnerabilidades y capacitación en seguridad informática para tu equipo.",price:80.00,currency:"USD",image:"https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=600&h=400&fit=crop"},
+{id:5,name:"Recuperación de Datos",description:"Recuperación profesional de archivos eliminados o dañados de discos duros, memorias USB, tarjetas SD y otros dispositivos de almacenamiento.",price:35.00,currency:"USD",image:"https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&h=400&fit=crop"},
+{id:6,name:"Soporte IT Remoto",description:"Asistencia técnica remota 24/7 para resolver problemas de software, virus, configuraciones, actualizaciones y cualquier incidencia informática.",price:15.00,currency:"USD",image:"https://images.unsplash.com/photo-1553877522-43269d4ea984?w=600&h=400&fit=crop"},
+{id:7,name:"Desarrollo de Software a Medida",description:"Aplicaciones personalizadas para tu negocio: sistemas de gestión, inventarios, facturación, CRM y cualquier solución que necesites.",price:300.00,currency:"USD",image:"https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=600&h=400&fit=crop"},
+{id:8,name:"Servicios en la Nube",description:"Migración a la nube, configuración de servidores cloud, respaldos automáticos, almacenamiento seguro y acceso remoto a tus archivos desde cualquier lugar.",price:50.00,currency:"USD",image:"https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&h=400&fit=crop"},
+{id:9,name:"Mantenimiento de Servidores",description:"Monitoreo, actualización, respaldo y optimización de servidores físicos y virtuales. Garantizamos el 99.9% de uptime para tu infraestructura.",price:120.00,currency:"USD",image:"https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&h=400&fit=crop"},
+{id:10,name:"Desarrollo de Apps Móviles",description:"Aplicaciones nativas y multiplataforma para Android e iOS. Diseño UI/UX moderno, publicación en stores y soporte post-lanzamiento.",price:250.00,currency:"USD",image:"https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&h=400&fit=crop"}
+];
+
+const testimonials=[
+{name:"Carlos Mendoza",role:"Dueño de Restaurante",text:"Excelente servicio. Repararon mi sistema de punto de venta en menos de 24 horas. Muy profesionales y precios justos. Los recomiendo al 100%.",rating:5,initials:"CM"},
+{name:"Ana María López",role:"Empresaria",text:"Contraté el servicio de redes para mi oficina y quedé impresionada con la calidad del trabajo. Todo quedó perfectamente organizado y funcionando a la perfección.",rating:5,initials:"AL"},
+{name:"Roberto Fernández",role:"Estudiante Universitario",text:"Me recuperaron todos los archivos de mi tesis de grado que pensé había perdido para siempre. Un servicio verdaderamente salvavidas. Muchas gracias.",rating:5,initials:"RF"},
+{name:"Diana Torres",role:"Gerente de Marketing",text:"El desarrollo web que hicieron para nuestra agencia superó todas nuestras expectativas. Moderno, rápido y con un diseño espectacular.",rating:5,initials:"DT"},
+{name:"Luis Herrera",role:"Contador",text:"El soporte IT remoto es increíble. Cualquier problema que tengo lo resuelven en minutos sin necesidad de moverme de mi oficina.",rating:5,initials:"LH"},
+{name:"Patricia Vega",role:"Directora de Clínica",text:"Implementaron un sistema de seguridad robusto para proteger los datos de nuestros pacientes. Muy satisfecha con el profesionalismo del equipo.",rating:5,initials:"PV"},
+{name:"Jorge Castillo",role:"Ingeniero Civil",text:"Desarrollaron una app de gestión de proyectos que ha revolucionado la forma en que trabajamos. Increíble atención al detalle.",rating:5,initials:"JC"},
+{name:"María Elena Ruiz",role:"Dueña de Tienda Online",text:"Migraron mi tienda a la nube y ahora todo funciona mucho más rápido y seguro. El servicio al cliente es excepcional.",rating:5,initials:"MR"},
+{name:"Fernando Díaz",role:"Abogado",text:"El mantenimiento de nuestros servidores ha sido impecable. Cero caídas en 6 meses. Un equipo verdaderamente confiable.",rating:5,initials:"FD"},
+{name:"Carmen Sánchez",role:"Profesora",text:"Repararon mi laptop que no encendía y ahora funciona como nueva. Precio muy accesible y trabajo garantizado.",rating:5,initials:"CS"},
+{name:"Alberto Reyes",role:"Emprendedor",text:"Desde que contraté sus servicios de ciberseguridad, duermo tranquilo sabiendo que mi negocio está protegido contra cualquier amenaza.",rating:5,initials:"AR"},
+{name:"Isabel Morales",role:"Diseñadora Gráfica",text:"La red WiFi que instalaron en mi estudio tiene una cobertura perfecta en todos los rincones. Sin interferencias ni caídas.",rating:5,initials:"IM"},
+{name:"Héctor Vargas",role:"Administrador de Empresa",text:"El software a medida que desarrollaron para nuestra gestión de inventarios nos ha ahorrado horas de trabajo manual cada semana.",rating:5,initials:"HV"},
+{name:"Natalia Ortega",role:"Médico",text:"Servicio puntual, profesional y con garantía. Repararon mi computadora el mismo día que la llevé. Definitivamente volveré.",rating:5,initials:"NO"},
+{name:"Ricardo Silva",role:"Arquitecto",text:"La página web que crearon para mi firma de arquitectura es simplemente espectacular. He recibido muchos elogios de mis clientes.",rating:5,initials:"RS"},
+{name:"Laura Jiménez",role:"Estudiante",text:"Me ayudaron a recuperar fotos familiares muy importantes de un disco dañado. No tengo palabras para agradecerles.",rating:5,initials:"LJ"},
+{name:"Miguel Ángel Cruz",role:"Comerciante",text:"El soporte técnico es rápido y efectivo. Cualquier problema que surge lo solucionan de inmediato. Muy recomendados.",rating:5,initials:"MC"},
+{name:"Sofía Martínez",role:"Consultora",text:"Contraté el servicio de nube para mi consultora y ha sido la mejor decisión. Accedo a mis archivos desde cualquier lugar del mundo.",rating:5,initials:"SM"},
+{name:"Daniel Pérez",role:"Técnico Electrónico",text:"Profesionales de verdad. Instalaron una red completa en mi taller con cableado organizado y etiquetado. Trabajo de primera calidad.",rating:5,initials:"DP"},
+{name:"Gabriela Flores",role:"Empresaria",text:"He trabajado con varias empresas de tecnología y Servitech Solution Lab es sin duda la mejor. Calidad, precio y atención impecables.",rating:5,initials:"GF"},
+{name:"Eduardo Ramos",role:"Fotógrafo",text:"Configuraron mi servidor de archivos para almacenar mis portfolios. El acceso es rápido y seguro. Excelente servicio.",rating:5,initials:"ER"},
+{name:"Valentina Castro",role:"Estudiante de Ingeniería",text:"Me instalaron un sistema operativo dual en mi laptop y optimizaron todo el equipo. Ahora funciona perfectamente para mis clases.",rating:5,initials:"VC"}
+];
+
+let cart=JSON.parse(localStorage.getItem('servitech_cart'))||[];
+
+function renderServices(){
+const grid=document.getElementById('servicesGrid');
+grid.innerHTML=services.map((service,index)=>
+`<div class="service-card animate" style="animation-delay:${index*0.1}s">
+<img src="${service.image}" alt="${service.name}" class="service-img" loading="lazy">
+<div class="service-content">
+<h3>${service.name}</h3>
+<p>${service.description}</p>
+<div class="service-price">$${service.price.toFixed(2)} <span>USD</span></div>
+<button class="add-to-cart" onclick="addToCart(${service.id},this)" id="btn-${service.id}">
+<i class="fas fa-cart-plus"></i> Agregar al Carrito
+</button>
+</div>
+</div>`
+).join('');
+}
+
+function renderTestimonials(){
+const grid=document.getElementById('testimonialsGrid');
+grid.innerHTML=testimonials.map((t,index)=>
+`<div class="testimonial-card animate" style="animation-delay:${index*0.05}s">
+<div class="stars">${'<i class="fas fa-star"></i>'.repeat(t.rating)}</div>
+<p class="testimonial-text">${t.text}</p>
+<div class="testimonial-author">
+<div class="author-avatar">${t.initials}</div>
+<div class="author-info">
+<h4>${t.name}</h4>
+<p>${t.role}</p>
+</div>
+</div>
+</div>`
+).join('');
+}
+
+function addToCart(serviceId,btn){
+const service=services.find(s=>s.id===serviceId);
+if(!service)return;
+const existing=cart.find(item=>item.id===serviceId);
+if(existing){showToast('Este servicio ya está en tu carrito','warning');return;}
+cart.push({...service});
+saveCart();updateCartUI();
+btn.innerHTML='<i class="fas fa-check"></i> Agregado';
+btn.classList.add('added');
+setTimeout(()=>{btn.innerHTML='<i class="fas fa-cart-plus"></i> Agregar al Carrito';btn.classList.remove('added');},2000);
+showToast(`${service.name} agregado al carrito`);
+}
+
+function removeFromCart(serviceId){
+cart=cart.filter(item=>item.id!==serviceId);
+saveCart();updateCartUI();
+showToast('Servicio eliminado del carrito');
+}
+
+function saveCart(){localStorage.setItem('servitech_cart',JSON.stringify(cart));}
+
+function updateCartUI(){
+const count=document.getElementById('cartCount');
+const itemsContainer=document.getElementById('cartItems');
+const totalEl=document.getElementById('cartTotal');
+const checkoutBtn=document.getElementById('checkoutBtn');
+count.textContent=cart.length;
+if(cart.length===0){
+itemsContainer.innerHTML=`<div class="cart-empty"><i class="fas fa-shopping-basket"></i><p>Tu carrito está vacío</p><p style="font-size:0.85rem;margin-top:10px">Agrega servicios para comenzar</p></div>`;
+totalEl.textContent='$0.00';checkoutBtn.disabled=true;
+}else{
+itemsContainer.innerHTML=cart.map(item=>
+`<div class="cart-item">
+<img src="${item.image}" alt="${item.name}">
+<div class="cart-item-info">
+<h4>${item.name}</h4>
+<p>$${item.price.toFixed(2)} USD</p>
+</div>
+<button class="remove-item" onclick="removeFromCart(${item.id})" title="Eliminar"><i class="fas fa-trash-alt"></i></button>
+</div>`
+).join('');
+const total=cart.reduce((sum,item)=>sum+item.price,0);
+totalEl.textContent=`$${total.toFixed(2)}`;checkoutBtn.disabled=false;
+}
+}
+
+function openCart(){
+document.getElementById('cartOverlay').classList.add('active');
+document.getElementById('cartSidebar').classList.add('active');
+document.body.style.overflow='hidden';
+}
+
+function closeCart(){
+document.getElementById('cartOverlay').classList.remove('active');
+document.getElementById('cartSidebar').classList.remove('active');
+document.body.style.overflow='';
+}
+
+function openCheckout(){
+if(cart.length===0)return;
+closeCart();
+const summary=document.getElementById('orderSummary');
+const total=cart.reduce((sum,item)=>sum+item.price,0);
+summary.innerHTML=`<h4><i class="fas fa-receipt"></i> Resumen del Pedido</h4>`+
+cart.map(item=>`<div class="order-item"><span>${item.name}</span><span>$${item.price.toFixed(2)}</span></div>`).join('')+
+`<div class="order-total"><span>TOTAL:</span><span>$${total.toFixed(2)} USD</span></div>`;
+document.getElementById('checkoutModal').classList.add('active');
+document.body.style.overflow='hidden';
+}
+
+function closeCheckout(){
+document.getElementById('checkoutModal').classList.remove('active');
+document.body.style.overflow='';
+}
+
+function sendWhatsAppOrder(e){
+e.preventDefault();
+const name=document.getElementById('clientName').value.trim();
+const phone=document.getElementById('clientPhone').value.trim();
+const email=document.getElementById('clientEmail').value.trim();
+const address=document.getElementById('clientAddress').value.trim();
+const payment=document.getElementById('paymentMethod').value;
+const notes=document.getElementById('clientNotes').value.trim();
+if(!name||!phone||!email||!address||!payment){showToast('Por favor completa todos los campos obligatorios','error');return;}
+const total=cart.reduce((sum,item)=>sum+item.price,0);
+let message=`🛒 *NUEVO PEDIDO - SERVITECH SOLUTION LAB*\n\n`;
+message+=`👤 *DATOS DEL CLIENTE*\n`;
+message+=`Nombre: ${name}\n`;
+message+=`Teléfono: ${phone}\n`;
+message+=`Email: ${email}\n`;
+message+=`Dirección: ${address}\n`;
+message+=`Método de Pago: ${payment.toUpperCase()}\n`;
+if(notes)message+=`Notas: ${notes}\n`;
+message+=`\n📋 *SERVICIOS SOLICITADOS*\n`;
+message+=`━━━━━━━━━━━━━━━━━━━━\n`;
+cart.forEach((item,index)=>{
+message+=`${index+1}. ${item.name}\n`;
+message+=`   Precio: $${item.price.toFixed(2)} USD\n`;
+message+=`   Descripción: ${item.description.substring(0,60)}...\n\n`;
+});
+message+=`━━━━━━━━━━━━━━━━━━━━\n`;
+message+=`💰 *TOTAL A PAGAR: $${total.toFixed(2)} USD*\n\n`;
+message+=`📅 Fecha: ${new Date().toLocaleDateString('es-ES')}\n`;
+message+=`⏰ Hora: ${new Date().toLocaleTimeString('es-ES')}\n\n`;
+message+=`Gracias por confiar en Servitech Solution Lab. Nos pondremos en contacto contigo para confirmar tu pedido.`;
+const encodedMessage=encodeURIComponent(message);
+const whatsappUrl=`https://wa.me/5351549437?text=${encodedMessage}`;
+window.open(whatsappUrl,'_blank');
+cart=[];saveCart();updateCartUI();closeCheckout();
+showToast('Pedido enviado a WhatsApp Business');
+document.getElementById('checkoutForm').reset();
+}
+
+function handleContactSubmit(e){
+e.preventDefault();
+const name=document.getElementById('contactName').value.trim();
+const email=document.getElementById('contactEmail').value.trim();
+const phone=document.getElementById('contactPhone').value.trim();
+const subject=document.getElementById('contactSubject').value;
+const message=document.getElementById('contactMessage').value.trim();
+if(!name||!email||!phone||!subject||!message){showToast('Por favor completa todos los campos obligatorios','error');return;}
+let whatsappMessage=`📩 *NUEVO MENSAJE DE CONTACTO*\n\n`;
+whatsappMessage+=`👤 Nombre: ${name}\n`;
+whatsappMessage+=`📧 Email: ${email}\n`;
+whatsappMessage+=`📱 Teléfono: ${phone}\n`;
+whatsappMessage+=`📝 Asunto: ${subject.toUpperCase()}\n\n`;
+whatsappMessage+=`💬 Mensaje:\n${message}\n\n`;
+whatsappMessage+=`📅 Enviado el: ${new Date().toLocaleString('es-ES')}`;
+const encoded=encodeURIComponent(whatsappMessage);
+window.open(`https://wa.me/5351549437?text=${encoded}`,'_blank');
+showToast('Mensaje enviado a WhatsApp Business');
+document.getElementById('contactForm').reset();
+}
+
+function showToast(msg,type='success'){
+const toast=document.getElementById('toast');
+const msgEl=document.getElementById('toastMessage');
+const icon=toast.querySelector('i');
+msgEl.textContent=msg;
+if(type==='error'){icon.className='fas fa-exclamation-circle';icon.style.color='#ef4444';}
+else if(type==='warning'){icon.className='fas fa-info-circle';icon.style.color='#f59e0b';}
+else{icon.className='fas fa-check-circle';icon.style.color='var(--red)';}
+toast.classList.add('show');
+setTimeout(()=>toast.classList.remove('show'),3000);
+}
+
+function initScrollAnimations(){
+const observer=new IntersectionObserver((entries)=>{
+entries.forEach(entry=>{
+if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target);}
+});
+},{threshold:0.1,rootMargin:'0px 0px -50px 0px'});
+document.querySelectorAll('.animate,.animate-left,.animate-right').forEach(el=>observer.observe(el));
+}
+
+function initNavbar(){
+const navbar=document.getElementById('navbar');
+window.addEventListener('scroll',()=>{
+if(window.scrollY>50)navbar.classList.add('scrolled');
+else navbar.classList.remove('scrolled');
+});
+}
+
+function initParticles(){
+const container=document.getElementById('particles');
+for(let i=0;i<30;i++){
+const p=document.createElement('div');
+p.className='particle';
+p.style.left=Math.random()*100+'%';
+p.style.top=Math.random()*100+'%';
+p.style.animationDelay=Math.random()*6+'s';
+p.style.animationDuration=(4+Math.random()*4)+'s';
+p.style.width=(2+Math.random()*4)+'px';
+p.style.height=p.style.width;
+container.appendChild(p);
+}
+}
+
+function toggleMobileMenu(){
+const links=document.querySelector('.nav-links');
+if(links.style.display==='flex'){links.style.display='none';}
+else{
+links.style.display='flex';
+links.style.flexDirection='column';
+links.style.position='absolute';
+links.style.top='70px';
+links.style.left='0';
+links.style.right='0';
+links.style.background='rgba(10,10,10,0.98)';
+links.style.padding='20px';
+links.style.gap='15px';
+links.style.borderBottom='1px solid var(--border)';
+}
+}
+
+(function(){
+document.addEventListener('contextmenu',e=>e.preventDefault());
+document.addEventListener('keydown',e=>{
+if(e.key==='F12'||(e.ctrlKey&&e.shiftKey&&['I','J','C'].includes(e.key))||(e.ctrlKey&&e.key==='u')){e.preventDefault();}
+});
+console.log('%c🔒 Servitech Solution Lab','color:#e50914;font-size:24px;font-weight:bold');
+console.log('%cEsta página está protegida. Acceso no autorizado está prohibido.','color:#888;font-size:14px');
+})();
+
+document.addEventListener('DOMContentLoaded',()=>{
+renderServices();
+renderTestimonials();
+updateCartUI();
+initScrollAnimations();
+initNavbar();
+initParticles();
+});
+</script>
+</body>
+</html>
