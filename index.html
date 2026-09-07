@@ -13,38 +13,38 @@
     <style>
         /* ===== VARIABLES ===== */
         :root {
-            --bg-primary: #0a0a0a;
-            --bg-secondary: #111111;
-            --bg-tertiary: #0d0d0d;
-            --bg-card: #1a1a1a;
-            --bg-input: #1a1a1a;
-            --text-primary: #ffffff;
-            --text-secondary: #cccccc;
-            --text-muted: #888888;
-            --border-color: #2a2a2a;
-            --red: #e50914;
-            --red-light: #ff1a25;
-            --red-dark: #b20710;
-            --red-glow: rgba(229, 9, 20, 0.4);
-            --shadow: 0 20px 50px rgba(229, 9, 20, 0.15);
+            --bg-primary: #0a0e1a;
+            --bg-secondary: #0f172a;
+            --bg-tertiary: #0b1120;
+            --bg-card: #1e293b;
+            --bg-input: #1e293b;
+            --text-primary: #f8fafc;
+            --text-secondary: #cbd5e1;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
+            --primary: #2563eb;
+            --primary-light: #3b82f6;
+            --primary-dark: #1d4ed8;
+            --primary-glow: rgba(37, 99, 235, 0.4);
+            --shadow: 0 20px 50px rgba(37, 99, 235, 0.15);
             --transition: 0.3s ease;
         }
 
         body.light-mode {
-            --bg-primary: #f4f4f4;
+            --bg-primary: #f1f5f9;
             --bg-secondary: #ffffff;
-            --bg-tertiary: #f0f0f0;
+            --bg-tertiary: #e2e8f0;
             --bg-card: #ffffff;
             --bg-input: #ffffff;
-            --text-primary: #1a1a1a;
-            --text-secondary: #333333;
-            --text-muted: #666666;
-            --border-color: #dddddd;
-            --red: #d9040e;
-            --red-light: #ff1a25;
-            --red-dark: #a3060f;
-            --red-glow: rgba(217, 4, 14, 0.3);
-            --shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+            --text-primary: #0f172a;
+            --text-secondary: #1e293b;
+            --text-muted: #64748b;
+            --border-color: #cbd5e1;
+            --primary: #2563eb;
+            --primary-light: #3b82f6;
+            --primary-dark: #1d4ed8;
+            --primary-glow: rgba(37, 99, 235, 0.3);
+            --shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
         }
 
         /* ===== RESET & BASE ===== */
@@ -70,92 +70,47 @@
             background: var(--bg-secondary);
         }
         ::-webkit-scrollbar-thumb {
-            background: var(--red);
+            background: var(--primary);
             border-radius: 4px;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: var(--red-light);
+            background: var(--primary-light);
         }
 
         /* ===== ANIMATIONS ===== */
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(40px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
         @keyframes pulse {
-            0%,
-            100% {
-                box-shadow: 0 0 0 0 var(--red-glow);
-            }
-            50% {
-                box-shadow: 0 0 20px 10px var(--red-glow);
-            }
+            0%, 100% { box-shadow: 0 0 0 0 var(--primary-glow); }
+            50% { box-shadow: 0 0 20px 10px var(--primary-glow); }
         }
         @keyframes glow {
-            0%,
-            100% {
-                text-shadow: 0 0 10px var(--red-glow), 0 0 20px var(--red-glow);
-            }
-            50% {
-                text-shadow: 0 0 20px var(--red-glow), 0 0 40px var(--red-glow);
-            }
+            0%, 100% { text-shadow: 0 0 10px var(--primary-glow), 0 0 20px var(--primary-glow); }
+            50% { text-shadow: 0 0 20px var(--primary-glow), 0 0 40px var(--primary-glow); }
         }
         @keyframes float {
-            0%,
-            100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-10px);
-            }
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
         @keyframes slideInLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-60px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
+            from { opacity: 0; transform: translateX(-60px); }
+            to { opacity: 1; transform: translateX(0); }
         }
         @keyframes slideInRight {
-            from {
-                opacity: 0;
-                transform: translateX(60px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
+            from { opacity: 0; transform: translateX(60px); }
+            to { opacity: 1; transform: translateX(0); }
         }
 
-        .animate {
-            opacity: 0;
-        }
-        .animate.visible {
-            animation: fadeInUp 0.8s ease forwards;
-        }
-        .animate-left.visible {
-            animation: slideInLeft 0.8s ease forwards;
-        }
-        .animate-right.visible {
-            animation: slideInRight 0.8s ease forwards;
-        }
+        .animate { opacity: 0; }
+        .animate.visible { animation: fadeInUp 0.8s ease forwards; }
+        .animate-left.visible { animation: slideInLeft 0.8s ease forwards; }
+        .animate-right.visible { animation: slideInRight 0.8s ease forwards; }
 
         /* ===== NAVBAR ===== */
         .navbar {
@@ -164,7 +119,7 @@
             left: 0;
             right: 0;
             z-index: 1000;
-            background: rgba(10, 10, 10, 0.95);
+            background: rgba(10, 14, 26, 0.95);
             backdrop-filter: blur(15px);
             border-bottom: 1px solid var(--border-color);
             padding: 0 5%;
@@ -178,12 +133,12 @@
             background: rgba(255, 255, 255, 0.95);
         }
         .navbar.scrolled {
-            background: rgba(10, 10, 10, 0.98);
-            box-shadow: 0 5px 30px rgba(229, 9, 20, 0.15);
+            background: rgba(10, 14, 26, 0.98);
+            box-shadow: 0 5px 30px rgba(37, 99, 235, 0.15);
         }
         body.light-mode .navbar.scrolled {
             background: rgba(255, 255, 255, 0.98);
-            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.08);
         }
 
         .logo {
@@ -197,11 +152,11 @@
             gap: 10px;
         }
         .logo i {
-            color: var(--red);
+            color: var(--primary);
             font-size: 1.6rem;
         }
         .logo span {
-            color: var(--red);
+            color: var(--primary);
         }
 
         .nav-links {
@@ -227,11 +182,11 @@
             left: 0;
             width: 0;
             height: 2px;
-            background: var(--red);
+            background: var(--primary);
             transition: width var(--transition);
         }
         .nav-links a:hover {
-            color: var(--red);
+            color: var(--primary);
         }
         .nav-links a:hover::after {
             width: 100%;
@@ -239,7 +194,7 @@
 
         .cart-btn {
             position: relative;
-            background: var(--red);
+            background: var(--primary);
             color: #fff;
             border: none;
             padding: 10px 20px;
@@ -254,16 +209,16 @@
             transition: all var(--transition);
         }
         .cart-btn:hover {
-            background: var(--red-light);
+            background: var(--primary-light);
             transform: scale(1.05);
-            box-shadow: 0 0 20px var(--red-glow);
+            box-shadow: 0 0 20px var(--primary-glow);
         }
         .cart-count {
             position: absolute;
             top: -8px;
             right: -8px;
             background: #fff;
-            color: var(--red);
+            color: var(--primary);
             font-size: 0.75rem;
             font-weight: 900;
             width: 22px;
@@ -289,8 +244,8 @@
             justify-content: center;
         }
         .theme-toggle:hover {
-            border-color: var(--red);
-            color: var(--red);
+            border-color: var(--primary);
+            color: var(--primary);
         }
 
         .mobile-menu-btn {
@@ -312,11 +267,11 @@
             padding: 100px 5% 60px;
             position: relative;
             overflow: hidden;
-            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 50%, #1a0505 100%);
+            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 50%, #0a1a3a 100%);
             transition: background var(--transition);
         }
         body.light-mode .hero {
-            background: linear-gradient(135deg, #f0f0f0 0%, #ffffff 50%, #fce4e4 100%);
+            background: linear-gradient(135deg, #e2e8f0 0%, #f8fafc 50%, #dbeafe 100%);
         }
         .hero::before {
             content: '';
@@ -325,8 +280,8 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: radial-gradient(circle at 20% 80%, rgba(229, 9, 20, 0.08) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(229, 9, 20, 0.05) 0%, transparent 50%);
+            background: radial-gradient(circle at 20% 80%, rgba(37, 99, 235, 0.08) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(37, 99, 235, 0.05) 0%, transparent 50%);
             pointer-events: none;
         }
         .hero-content {
@@ -336,9 +291,9 @@
         }
         .hero-badge {
             display: inline-block;
-            background: rgba(229, 9, 20, 0.15);
-            border: 1px solid var(--red-dark);
-            color: var(--red-light);
+            background: rgba(37, 99, 235, 0.15);
+            border: 1px solid var(--primary-dark);
+            color: var(--primary-light);
             padding: 8px 25px;
             border-radius: 50px;
             font-weight: 600;
@@ -357,7 +312,7 @@
             animation: fadeInUp 0.8s ease 0.2s both;
         }
         .hero h1 span {
-            color: var(--red);
+            color: var(--primary);
             animation: glow 3s ease infinite;
         }
         .hero p {
@@ -375,7 +330,7 @@
             animation: fadeInUp 0.8s ease 0.6s both;
         }
         .btn-primary {
-            background: var(--red);
+            background: var(--primary);
             color: #fff;
             padding: 15px 40px;
             border-radius: 10px;
@@ -384,7 +339,7 @@
             font-size: 1.1rem;
             text-transform: uppercase;
             letter-spacing: 1px;
-            border: 2px solid var(--red);
+            border: 2px solid var(--primary);
             transition: all var(--transition);
             display: inline-flex;
             align-items: center;
@@ -392,8 +347,8 @@
         }
         .btn-primary:hover {
             background: transparent;
-            color: var(--red);
-            box-shadow: 0 0 30px var(--red-glow);
+            color: var(--primary);
+            box-shadow: 0 0 30px var(--primary-glow);
             transform: translateY(-3px);
         }
         .btn-secondary {
@@ -413,8 +368,8 @@
             gap: 10px;
         }
         .btn-secondary:hover {
-            border-color: var(--red);
-            color: var(--red);
+            border-color: var(--primary);
+            color: var(--primary);
             transform: translateY(-3px);
         }
         .hero-stats {
@@ -427,7 +382,7 @@
         .stat-item h3 {
             font-family: 'Orbitron', sans-serif;
             font-size: 2.5rem;
-            color: var(--red);
+            color: var(--primary);
         }
         .stat-item p {
             color: var(--text-muted);
@@ -455,7 +410,7 @@
             color: var(--text-primary);
         }
         .section-title h2 span {
-            color: var(--red);
+            color: var(--primary);
         }
         .section-title p {
             color: var(--text-muted);
@@ -466,7 +421,7 @@
         .section-title .line {
             width: 80px;
             height: 3px;
-            background: var(--red);
+            background: var(--primary);
             margin: 20px auto 0;
             border-radius: 2px;
         }
@@ -494,7 +449,7 @@
             left: 0;
             right: 0;
             height: 3px;
-            background: var(--red);
+            background: var(--primary);
             transform: scaleX(0);
             transition: transform var(--transition);
         }
@@ -503,7 +458,7 @@
         }
         .service-card:hover {
             transform: translateY(-10px);
-            border-color: var(--red-dark);
+            border-color: var(--primary-dark);
             box-shadow: var(--shadow);
         }
         .service-img {
@@ -533,7 +488,7 @@
         .service-price {
             font-family: 'Orbitron', sans-serif;
             font-size: 1.6rem;
-            color: var(--red);
+            color: var(--primary);
             font-weight: 900;
             margin-bottom: 15px;
         }
@@ -544,7 +499,7 @@
         }
         .add-to-cart {
             width: 100%;
-            background: var(--red);
+            background: var(--primary);
             color: #fff;
             border: none;
             padding: 14px;
@@ -562,8 +517,8 @@
             gap: 10px;
         }
         .add-to-cart:hover {
-            background: var(--red-light);
-            box-shadow: 0 0 25px var(--red-glow);
+            background: var(--primary-light);
+            box-shadow: 0 0 25px var(--primary-glow);
         }
         .add-to-cart.added {
             background: #22c55e;
@@ -598,26 +553,26 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle, rgba(229, 9, 20, 0.05) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(37, 99, 235, 0.05) 0%, transparent 70%);
             pointer-events: none;
         }
         .mv-card:hover {
-            border-color: var(--red-dark);
+            border-color: var(--primary-dark);
             transform: translateY(-5px);
             box-shadow: var(--shadow);
         }
         .mv-icon {
             width: 80px;
             height: 80px;
-            background: rgba(229, 9, 20, 0.1);
-            border: 2px solid var(--red-dark);
+            background: rgba(37, 99, 235, 0.1);
+            border: 2px solid var(--primary-dark);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 25px;
             font-size: 2rem;
-            color: var(--red);
+            color: var(--primary);
         }
         .mv-card h3 {
             font-family: 'Orbitron', sans-serif;
@@ -652,7 +607,7 @@
             transition: all var(--transition);
         }
         .testimonial-card:hover {
-            border-color: var(--red-dark);
+            border-color: var(--primary-dark);
             transform: translateY(-5px);
         }
         .testimonial-card::before {
@@ -661,7 +616,7 @@
             top: 10px;
             right: 20px;
             font-size: 4rem;
-            color: var(--red);
+            color: var(--primary);
             opacity: 0.2;
             font-family: serif;
         }
@@ -685,7 +640,7 @@
             width: 50px;
             height: 50px;
             border-radius: 50%;
-            background: linear-gradient(135deg, var(--red), var(--red-dark));
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             display: flex;
             align-items: center;
             justify-content: center;
@@ -738,18 +693,18 @@
             transition: all var(--transition);
         }
         .contact-item:hover {
-            border-color: var(--red-dark);
+            border-color: var(--primary-dark);
             transform: translateX(5px);
         }
         .contact-item i {
             width: 45px;
             height: 45px;
-            background: rgba(229, 9, 20, 0.1);
+            background: rgba(37, 99, 235, 0.1);
             border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--red);
+            color: var(--primary);
             font-size: 1.1rem;
         }
         .contact-item div h4 {
@@ -796,8 +751,8 @@
         .form-group textarea:focus,
         .form-group select:focus {
             outline: none;
-            border-color: var(--red);
-            box-shadow: 0 0 15px rgba(229, 9, 20, 0.1);
+            border-color: var(--primary);
+            box-shadow: 0 0 15px rgba(37, 99, 235, 0.1);
         }
         .form-group input::placeholder,
         .form-group textarea::placeholder {
@@ -809,7 +764,7 @@
         }
         .submit-btn {
             width: 100%;
-            background: var(--red);
+            background: var(--primary);
             color: #fff;
             border: none;
             padding: 16px;
@@ -823,8 +778,8 @@
             transition: all var(--transition);
         }
         .submit-btn:hover {
-            background: var(--red-light);
-            box-shadow: 0 0 30px var(--red-glow);
+            background: var(--primary-light);
+            box-shadow: 0 0 30px var(--primary-glow);
             transform: translateY(-2px);
         }
 
@@ -878,7 +833,7 @@
             color: var(--text-primary);
         }
         .cart-header h3 i {
-            color: var(--red);
+            color: var(--primary);
         }
         .close-cart {
             background: none;
@@ -889,7 +844,7 @@
             transition: color var(--transition);
         }
         .close-cart:hover {
-            color: var(--red);
+            color: var(--primary);
         }
         .cart-items {
             flex: 1;
@@ -931,7 +886,7 @@
             color: var(--text-primary);
         }
         .cart-item-info p {
-            color: var(--red);
+            color: var(--primary);
             font-weight: 700;
             font-size: 0.95rem;
         }
@@ -945,7 +900,7 @@
             transition: color var(--transition);
         }
         .remove-item:hover {
-            color: var(--red);
+            color: var(--primary);
         }
         .cart-footer {
             padding: 25px 30px;
@@ -967,11 +922,11 @@
         .cart-total strong {
             font-family: 'Orbitron', sans-serif;
             font-size: 1.5rem;
-            color: var(--red);
+            color: var(--primary);
         }
         .checkout-btn {
             width: 100%;
-            background: var(--red);
+            background: var(--primary);
             color: #fff;
             border: none;
             padding: 16px;
@@ -989,8 +944,8 @@
             gap: 10px;
         }
         .checkout-btn:hover {
-            background: var(--red-light);
-            box-shadow: 0 0 30px var(--red-glow);
+            background: var(--primary-light);
+            box-shadow: 0 0 30px var(--primary-glow);
         }
         .checkout-btn:disabled {
             background: var(--border-color);
@@ -1054,7 +1009,7 @@
             transition: color var(--transition);
         }
         .close-checkout:hover {
-            color: var(--red);
+            color: var(--primary);
         }
         .order-summary {
             background: var(--bg-card);
@@ -1067,7 +1022,7 @@
             font-family: 'Orbitron', sans-serif;
             font-size: 1rem;
             margin-bottom: 15px;
-            color: var(--red);
+            color: var(--primary);
         }
         .order-item {
             display: flex;
@@ -1085,19 +1040,17 @@
             justify-content: space-between;
             padding-top: 15px;
             margin-top: 10px;
-            border-top: 2px solid var(--red-dark);
+            border-top: 2px solid var(--primary-dark);
             font-weight: 700;
             font-size: 1.1rem;
             color: var(--text-primary);
         }
         .order-total span:last-child {
-            color: var(--red);
+            color: var(--primary);
             font-family: 'Orbitron', sans-serif;
         }
 
-        .required {
-            color: var(--red);
-        }
+        .required { color: var(--primary); }
 
         .whatsapp-btn {
             width: 100%;
@@ -1152,7 +1105,7 @@
             color: var(--text-primary);
         }
         .footer-brand h3 span {
-            color: var(--red);
+            color: var(--primary);
         }
         .footer-brand p {
             color: var(--text-muted);
@@ -1177,9 +1130,9 @@
             transition: all var(--transition);
         }
         .social-links a:hover {
-            background: var(--red);
+            background: var(--primary);
             color: #fff;
-            border-color: var(--red);
+            border-color: var(--primary);
             transform: translateY(-3px);
         }
         .footer-col h4 {
@@ -1201,7 +1154,7 @@
             font-size: 0.95rem;
         }
         .footer-col ul li a:hover {
-            color: var(--red);
+            color: var(--primary);
         }
         .footer-bottom {
             text-align: center;
@@ -1211,7 +1164,7 @@
             font-size: 0.9rem;
         }
         .footer-bottom a {
-            color: var(--red);
+            color: var(--primary);
             text-decoration: none;
         }
 
@@ -1221,8 +1174,8 @@
             bottom: 30px;
             right: 30px;
             background: var(--bg-card);
-            border: 1px solid var(--red-dark);
-            border-left: 4px solid var(--red);
+            border: 1px solid var(--primary-dark);
+            border-left: 4px solid var(--primary);
             padding: 18px 25px;
             border-radius: 12px;
             display: flex;
@@ -1237,7 +1190,7 @@
             transform: translateX(0);
         }
         .toast i {
-            color: var(--red);
+            color: var(--primary);
             font-size: 1.3rem;
         }
         .toast p {
@@ -1260,7 +1213,7 @@
             position: absolute;
             width: 4px;
             height: 4px;
-            background: var(--red);
+            background: var(--primary);
             border-radius: 50%;
             opacity: 0.3;
             animation: float 6s ease-in-out infinite;
@@ -1268,39 +1221,18 @@
 
         /* ===== RESPONSIVE ===== */
         @media(max-width:1024px) {
-            .contact-grid {
-                grid-template-columns: 1fr;
-            }
-            .footer-grid {
-                grid-template-columns: 1fr 1fr;
-            }
+            .contact-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
         }
         @media(max-width:768px) {
-            .nav-links {
-                display: none;
-            }
-            .mobile-menu-btn {
-                display: block;
-            }
-            .hero h1 {
-                font-size: 2.2rem;
-            }
-            .hero-stats {
-                gap: 30px;
-                flex-wrap: wrap;
-            }
-            .mv-grid {
-                grid-template-columns: 1fr;
-            }
-            .footer-grid {
-                grid-template-columns: 1fr;
-            }
-            .cart-sidebar {
-                width: 100%;
-            }
-            .checkout-content {
-                padding: 25px;
-            }
+            .nav-links { display: none; }
+            .mobile-menu-btn { display: block; }
+            .hero h1 { font-size: 2.2rem; }
+            .hero-stats { gap: 30px; flex-wrap: wrap; }
+            .mv-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr; }
+            .cart-sidebar { width: 100%; }
+            .checkout-content { padding: 25px; }
         }
     </style>
 </head>
@@ -1462,7 +1394,7 @@
                 <h4>Servicios</h4>
                 <ul>
                     <li><a href="#servicios">Reparación de PC</a></li>
-                    <li><a href="#servicios">Redes y Conectividad</a></li>
+                    <li><a href="#servicios">Redes</a></li>
                     <li><a href="#servicios">Desarrollo Web</a></li>
                     <li><a href="#servicios">Ciberseguridad</a></li>
                     <li><a href="#servicios">Soporte IT</a></li>
@@ -1488,7 +1420,7 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2026 LD SmartLab. Todos los derechos reservados. | Desarrollado con <i class="fas fa-heart" style="color:var(--red)"></i> por LD SmartLab</p>
+            <p>&copy; 2026 LD SmartLab. Todos los derechos reservados. | Desarrollado con <i class="fas fa-heart" style="color:var(--primary)"></i> por LD SmartLab</p>
         </div>
     </footer>
 
@@ -1570,151 +1502,149 @@
 
     <script>
         // ============================================================
-        //  DATOS DE SERVICIOS (precios en CUP, actualizados 2025-2026)
-        //  Se agregaron: Asesoría y Diseño de Tesis, Marketing Digital,
-        //  Consultoría y Capacitación en Inteligencia Artificial.
+        //  DATOS DE SERVICIOS (precios actualizados 2026)
         // ============================================================
-        const services = [{
-            id: 1,
-            name: "Reparación de Computadoras",
-            description: "Diagnóstico y reparación completa de equipos de escritorio y laptops. Incluye cambio de piezas, limpieza interna, optimización del sistema y garantía de 30 días.",
-            price: 800,
-            currency: "CUP",
-            image: "https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?w=600&h=400&fit=crop"
-        }, {
-            id: 2,
-            name: "Instalación de Redes",
-            description: "Diseño e instalación de redes cableadas e inalámbricas para hogares y empresas. Configuración de routers, switches, access points y cableado estructurado.",
-            price: 2000,
-            currency: "CUP",
-            image: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=600&h=400&fit=crop"
-        }, {
-            id: 3,
-            name: "Desarrollo Web Profesional",
-            description: "Creación de sitios web modernos, responsivos y optimizados para SEO. Incluye diseño personalizado, panel administrativo, hosting y dominio por un año.",
-            price: 5500,
-            currency: "CUP",
-            image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=600&h=400&fit=crop"
-        }, {
-            id: 4,
-            name: "Ciberseguridad Empresarial",
-            description: "Auditoría de seguridad, protección contra malware, firewall, VPN, análisis de vulnerabilidades y capacitación en seguridad informática para tu equipo.",
-            price: 3200,
-            currency: "CUP",
-            image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=600&h=400&fit=crop"
-        }, {
-            id: 5,
-            name: "Recuperación de Datos",
-            description: "Recuperación profesional de archivos eliminados o dañados de discos duros, memorias USB, tarjetas SD y otros dispositivos de almacenamiento.",
-            price: 1500,
-            currency: "CUP",
-            image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&h=400&fit=crop"
-        }, {
-            id: 6,
-            name: "Soporte IT Remoto",
-            description: "Asistencia técnica remota 24/7 para resolver problemas de software, virus, configuraciones, actualizaciones y cualquier incidencia informática.",
-            price: 500,
-            currency: "CUP",
-            image: "https://images.unsplash.com/photo-1553877522-43269d4ea984?w=600&h=400&fit=crop"
-        }, {
-            id: 7,
-            name: "Desarrollo de Software a Medida",
-            description: "Aplicaciones personalizadas para tu negocio: sistemas de gestión, inventarios, facturación, CRM y cualquier solución que necesites.",
-            price: 10000,
-            currency: "CUP",
-            image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=600&h=400&fit=crop"
-        }, {
-            id: 8,
-            name: "Servicios en la Nube",
-            description: "Migración a la nube, configuración de servidores cloud, respaldos automáticos, almacenamiento seguro y acceso remoto a tus archivos desde cualquier lugar.",
-            price: 2200,
-            currency: "CUP",
-            image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&h=400&fit=crop"
-        }, {
-            id: 9,
-            name: "Mantenimiento de Servidores",
-            description: "Monitoreo, actualización, respaldo y optimización de servidores físicos y virtuales. Garantizamos el 99.9% de uptime para tu infraestructura.",
-            price: 4500,
-            currency: "CUP",
-            image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&h=400&fit=crop"
-        }, {
-            id: 10,
-            name: "Desarrollo de Apps Móviles",
-            description: "Aplicaciones nativas y multiplataforma para Android e iOS. Diseño UI/UX moderno, publicación en stores y soporte post-lanzamiento.",
-            price: 8500,
-            currency: "CUP",
-            image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&h=400&fit=crop"
-        },
-        // ===== NUEVOS SERVICIOS AGREGADOS =====
-        {
-            id: 11,
-            name: "Asesoría y Diseño de Tesis",
-            description: "Apoyo integral en la elaboración de tesis de grado y posgrado. Incluye asesoría metodológica, estructuración, análisis de datos, corrección de estilo y preparación para la defensa.",
-            price: 2500,
-            currency: "CUP",
-            image: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=600&h=400&fit=crop"
-        }, {
-            id: 12,
-            name: "Marketing Digital",
-            description: "Estrategias de marketing para potenciar tu negocio en línea: gestión de redes sociales, publicidad en Google y Facebook, SEO, email marketing y análisis de métricas.",
-            price: 3500,
-            currency: "CUP",
-            image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop"
-        }, {
-            id: 13,
-            name: "Consultoría y Capacitación en IA",
-            description: "Instalación y configuración de herramientas de Inteligencia Artificial. Curso básico e intermedio sobre IA y sus aplicaciones en la vida cotidiana y empresarial.",
-            price: 4500,
-            currency: "CUP",
-            image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=600&h=400&fit=crop"
-        }];
+        const services = [
+            {
+                id: 1,
+                name: "Reparación de Computadoras",
+                description: "Diagnóstico y reparación completa de equipos de escritorio y laptops. Precio base sin cambio de piezas. Si se requiere cambio de piezas, el costo adicional se cotiza según el tipo de pieza. Incluye limpieza interna, optimización del sistema y garantía de 30 días.",
+                price: 3000,
+                currency: "CUP",
+                image: "https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?w=600&h=400&fit=crop"
+            },
+            {
+                id: 2,
+                name: "Instalación de Redes Empresariales",
+                description: "Diseño e instalación de redes cableadas e inalámbricas para empresas de cualquier tamaño. Configuración de routers, switches, access points y cableado estructurado. Solución integral para conexiones de alta demanda.",
+                price: 25000,
+                currency: "CUP",
+                image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&h=400&fit=crop"
+            },
+            {
+                id: 3,
+                name: "Instalación de Redes Domésticas",
+                description: "Instalación de redes WiFi para hogares, cobertura total y configuración de routers y repetidores. Ideal para mejorar la conectividad en tu casa.",
+                price: 10000,
+                currency: "CUP",
+                image: "https://images.unsplash.com/photo-1614654542443-8a3da63e6599?w=600&h=400&fit=crop"
+            },
+            {
+                id: 4,
+                name: "Desarrollo Web Profesional",
+                description: "Creación de sitios web modernos, responsivos y optimizados para SEO. El precio puede variar según la complejidad del proyecto. Incluye diseño personalizado, panel administrativo, hosting y dominio por un año.",
+                price: 670000,
+                currency: "CUP",
+                image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=600&h=400&fit=crop"
+            },
+            {
+                id: 5,
+                name: "Ciberseguridad Empresarial",
+                description: "Auditoría de seguridad, protección contra malware, firewall, VPN, análisis de vulnerabilidades y capacitación en seguridad informática para tu equipo.",
+                price: 15000,
+                currency: "CUP",
+                image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=600&h=400&fit=crop"
+            },
+            {
+                id: 6,
+                name: "Recuperación de Datos",
+                description: "Recuperación profesional de archivos eliminados o dañados de discos duros, memorias USB, tarjetas SD y otros dispositivos de almacenamiento.",
+                price: 3500,
+                currency: "CUP",
+                image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&h=400&fit=crop"
+            },
+            {
+                id: 7,
+                name: "Soporte IT Remoto",
+                description: "Asistencia técnica remota 24/7 para resolver problemas de software, virus, configuraciones, actualizaciones y cualquier incidencia informática.",
+                price: 5000,
+                currency: "CUP",
+                image: "https://images.unsplash.com/photo-1553877522-43269d4ea984?w=600&h=400&fit=crop"
+            },
+            {
+                id: 8,
+                name: "Desarrollo de Software a Medida",
+                description: "Aplicaciones personalizadas para tu negocio: sistemas de gestión, inventarios, facturación, CRM y cualquier solución que necesites. Precio desde $50,000 hasta $120,000 según requerimientos.",
+                price: 50000,
+                currency: "CUP",
+                image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=600&h=400&fit=crop"
+            },
+            {
+                id: 9,
+                name: "Servicios en la Nube",
+                description: "Migración a la nube, configuración de servidores cloud, respaldos automáticos, almacenamiento seguro y acceso remoto a tus archivos desde cualquier lugar. El precio puede variar según el alcance del proyecto.",
+                price: 600000,
+                currency: "CUP",
+                image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&h=400&fit=crop"
+            },
+            {
+                id: 10,
+                name: "Mantenimiento de Servidores",
+                description: "Monitoreo, actualización, respaldo y optimización de servidores físicos y virtuales. Garantizamos el 99.9% de uptime para tu infraestructura.",
+                price: 8500,
+                currency: "CUP",
+                image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&h=400&fit=crop"
+            },
+            {
+                id: 11,
+                name: "Desarrollo de Apps Móviles",
+                description: "Aplicaciones nativas y multiplataforma para Android e iOS. Diseño UI/UX moderno, publicación en stores y soporte post-lanzamiento. El precio puede variar según la complejidad.",
+                price: 80000,
+                currency: "CUP",
+                image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&h=400&fit=crop"
+            },
+            {
+                id: 12,
+                name: "Asesoría y Diseño de Tesis",
+                description: "Apoyo integral en la elaboración de tesis de grado y posgrado. Incluye asesoría metodológica, estructuración, análisis de datos, corrección de estilo y preparación para la defensa.",
+                price: 7000,
+                currency: "CUP",
+                image: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=600&h=400&fit=crop"
+            },
+            {
+                id: 13,
+                name: "Marketing Digital",
+                description: "Estrategias de marketing para potenciar tu negocio en línea: gestión de redes sociales, publicidad en Google y Facebook, SEO, email marketing y análisis de métricas. El precio puede variar según el plan.",
+                price: 8500,
+                currency: "CUP",
+                image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop"
+            },
+            {
+                id: 14,
+                name: "Consultoría y Capacitación en IA",
+                description: "Instalación y configuración de herramientas de Inteligencia Artificial. Curso básico e intermedio sobre IA y sus aplicaciones en la vida cotidiana y empresarial. El precio puede variar según el nivel de capacitación.",
+                price: 7500,
+                currency: "CUP",
+                image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=600&h=400&fit=crop"
+            }
+        ];
 
         // ============================================================
         //  TESTIMONIALS (sin cambios)
         // ============================================================
         const testimonials = [
-            { name: "Carlos Mendoza", role: "Dueño de Restaurante", text: "Excelente servicio. Repararon mi sistema de punto de venta en menos de 24 horas. Muy profesionales y precios justos. Los recomiendo al 100%.", rating: 5,
-                initials: "CM" },
-            { name: "Ana María López", role: "Empresaria", text: "Contraté el servicio de redes para mi oficina y quedé impresionada con la calidad del trabajo. Todo quedó perfectamente organizado y funcionando a la perfección.",
-                rating: 5, initials: "AL" },
-            { name: "Roberto Fernández", role: "Estudiante Universitario", text: "Me recuperaron todos los archivos de mi tesis de grado que pensé había perdido para siempre. Un servicio verdaderamente salvavidas. Muchas gracias.",
-                rating: 5, initials: "RF" },
-            { name: "Diana Torres", role: "Gerente de Marketing", text: "El desarrollo web que hicieron para nuestra agencia superó todas nuestras expectativas. Moderno, rápido y con un diseño espectacular.", rating: 5,
-                initials: "DT" },
-            { name: "Luis Herrera", role: "Contador", text: "El soporte IT remoto es increíble. Cualquier problema que tengo lo resuelven en minutos sin necesidad de moverme de mi oficina.", rating: 5,
-                initials: "LH" },
-            { name: "Patricia Vega", role: "Directora de Clínica", text: "Implementaron un sistema de seguridad robusto para proteger los datos de nuestros pacientes. Muy satisfecha con el profesionalismo del equipo.",
-                rating: 5, initials: "PV" },
-            { name: "Jorge Castillo", role: "Ingeniero Civil", text: "Desarrollaron una app de gestión de proyectos que ha revolucionado la forma en que trabajamos. Increíble atención al detalle.", rating: 5,
-                initials: "JC" },
-            { name: "María Elena Ruiz", role: "Dueña de Tienda Online", text: "Migraron mi tienda a la nube y ahora todo funciona mucho más rápido y seguro. El servicio al cliente es excepcional.", rating: 5,
-                initials: "MR" },
+            { name: "Carlos Mendoza", role: "Dueño de Restaurante", text: "Excelente servicio. Repararon mi sistema de punto de venta en menos de 24 horas. Muy profesionales y precios justos. Los recomiendo al 100%.", rating: 5, initials: "CM" },
+            { name: "Ana María López", role: "Empresaria", text: "Contraté el servicio de redes para mi oficina y quedé impresionada con la calidad del trabajo. Todo quedó perfectamente organizado y funcionando a la perfección.", rating: 5, initials: "AL" },
+            { name: "Roberto Fernández", role: "Estudiante Universitario", text: "Me recuperaron todos los archivos de mi tesis de grado que pensé había perdido para siempre. Un servicio verdaderamente salvavidas. Muchas gracias.", rating: 5, initials: "RF" },
+            { name: "Diana Torres", role: "Gerente de Marketing", text: "El desarrollo web que hicieron para nuestra agencia superó todas nuestras expectativas. Moderno, rápido y con un diseño espectacular.", rating: 5, initials: "DT" },
+            { name: "Luis Herrera", role: "Contador", text: "El soporte IT remoto es increíble. Cualquier problema que tengo lo resuelven en minutos sin necesidad de moverme de mi oficina.", rating: 5, initials: "LH" },
+            { name: "Patricia Vega", role: "Directora de Clínica", text: "Implementaron un sistema de seguridad robusto para proteger los datos de nuestros pacientes. Muy satisfecha con el profesionalismo del equipo.", rating: 5, initials: "PV" },
+            { name: "Jorge Castillo", role: "Ingeniero Civil", text: "Desarrollaron una app de gestión de proyectos que ha revolucionado la forma en que trabajamos. Increíble atención al detalle.", rating: 5, initials: "JC" },
+            { name: "María Elena Ruiz", role: "Dueña de Tienda Online", text: "Migraron mi tienda a la nube y ahora todo funciona mucho más rápido y seguro. El servicio al cliente es excepcional.", rating: 5, initials: "MR" },
             { name: "Fernando Díaz", role: "Abogado", text: "El mantenimiento de nuestros servidores ha sido impecable. Cero caídas en 6 meses. Un equipo verdaderamente confiable.", rating: 5, initials: "FD" },
             { name: "Carmen Sánchez", role: "Profesora", text: "Repararon mi laptop que no encendía y ahora funciona como nueva. Precio muy accesible y trabajo garantizado.", rating: 5, initials: "CS" },
-            { name: "Alberto Reyes", role: "Emprendedor", text: "Desde que contraté sus servicios de ciberseguridad, duermo tranquilo sabiendo que mi negocio está protegido contra cualquier amenaza.",
-                rating: 5, initials: "AR" },
-            { name: "Isabel Morales", role: "Diseñadora Gráfica", text: "La red WiFi que instalaron en mi estudio tiene una cobertura perfecta en todos los rincones. Sin interferencias ni caídas.", rating: 5,
-                initials: "IM" },
-            { name: "Héctor Vargas", role: "Administrador de Empresa", text: "El software a medida que desarrollaron para nuestra gestión de inventarios nos ha ahorrado horas de trabajo manual cada semana.",
-                rating: 5, initials: "HV" },
-            { name: "Natalia Ortega", role: "Médico", text: "Servicio puntual, profesional y con garantía. Repararon mi computadora el mismo día que la llevé. Definitivamente volveré.", rating: 5,
-                initials: "NO" },
-            { name: "Ricardo Silva", role: "Arquitecto", text: "La página web que crearon para mi firma de arquitectura es simplemente espectacular. He recibido muchos elogios de mis clientes.", rating: 5,
-                initials: "RS" },
-            { name: "Laura Jiménez", role: "Estudiante", text: "Me ayudaron a recuperar fotos familiares muy importantes de un disco dañado. No tengo palabras para agradecerles.", rating: 5,
-                initials: "LJ" },
-            { name: "Miguel Ángel Cruz", role: "Comerciante", text: "El soporte técnico es rápido y efectivo. Cualquier problema que surge lo solucionan de inmediato. Muy recomendados.", rating: 5,
-                initials: "MC" },
-            { name: "Sofía Martínez", role: "Consultora", text: "Contraté el servicio de nube para mi consultora y ha sido la mejor decisión. Accedo a mis archivos desde cualquier lugar del mundo.",
-                rating: 5, initials: "SM" },
-            { name: "Daniel Pérez", role: "Técnico Electrónico", text: "Profesionales de verdad. Instalaron una red completa en mi taller con cableado organizado y etiquetado. Trabajo de primera calidad.",
-                rating: 5, initials: "DP" },
-            { name: "Gabriela Flores", role: "Empresaria", text: "He trabajado con varias empresas de tecnología y LD SmartLab es sin duda la mejor. Calidad, precio y atención impecables.", rating: 5,
-                initials: "GF" },
-            { name: "Eduardo Ramos", role: "Fotógrafo", text: "Configuraron mi servidor de archivos para almacenar mis portfolios. El acceso es rápido y seguro. Excelente servicio.", rating: 5,
-                initials: "ER" },
-            { name: "Valentina Castro", role: "Estudiante de Ingeniería", text: "Me instalaron un sistema operativo dual en mi laptop y optimizaron todo el equipo. Ahora funciona perfectamente para mis clases.",
-                rating: 5, initials: "VC" }
+            { name: "Alberto Reyes", role: "Emprendedor", text: "Desde que contraté sus servicios de ciberseguridad, duermo tranquilo sabiendo que mi negocio está protegido contra cualquier amenaza.", rating: 5, initials: "AR" },
+            { name: "Isabel Morales", role: "Diseñadora Gráfica", text: "La red WiFi que instalaron en mi estudio tiene una cobertura perfecta en todos los rincones. Sin interferencias ni caídas.", rating: 5, initials: "IM" },
+            { name: "Héctor Vargas", role: "Administrador de Empresa", text: "El software a medida que desarrollaron para nuestra gestión de inventarios nos ha ahorrado horas de trabajo manual cada semana.", rating: 5, initials: "HV" },
+            { name: "Natalia Ortega", role: "Médico", text: "Servicio puntual, profesional y con garantía. Repararon mi computadora el mismo día que la llevé. Definitivamente volveré.", rating: 5, initials: "NO" },
+            { name: "Ricardo Silva", role: "Arquitecto", text: "La página web que crearon para mi firma de arquitectura es simplemente espectacular. He recibido muchos elogios de mis clientes.", rating: 5, initials: "RS" },
+            { name: "Laura Jiménez", role: "Estudiante", text: "Me ayudaron a recuperar fotos familiares muy importantes de un disco dañado. No tengo palabras para agradecerles.", rating: 5, initials: "LJ" },
+            { name: "Miguel Ángel Cruz", role: "Comerciante", text: "El soporte técnico es rápido y efectivo. Cualquier problema que surge lo solucionan de inmediato. Muy recomendados.", rating: 5, initials: "MC" },
+            { name: "Sofía Martínez", role: "Consultora", text: "Contraté el servicio de nube para mi consultora y ha sido la mejor decisión. Accedo a mis archivos desde cualquier lugar del mundo.", rating: 5, initials: "SM" },
+            { name: "Daniel Pérez", role: "Técnico Electrónico", text: "Profesionales de verdad. Instalaron una red completa en mi taller con cableado organizado y etiquetado. Trabajo de primera calidad.", rating: 5, initials: "DP" },
+            { name: "Gabriela Flores", role: "Empresaria", text: "He trabajado con varias empresas de tecnología y LD SmartLab es sin duda la mejor. Calidad, precio y atención impecables.", rating: 5, initials: "GF" },
+            { name: "Eduardo Ramos", role: "Fotógrafo", text: "Configuraron mi servidor de archivos para almacenar mis portfolios. El acceso es rápido y seguro. Excelente servicio.", rating: 5, initials: "ER" },
+            { name: "Valentina Castro", role: "Estudiante de Ingeniería", text: "Me instalaron un sistema operativo dual en mi laptop y optimizaron todo el equipo. Ahora funciona perfectamente para mis clases.", rating: 5, initials: "VC" }
         ];
 
         // ============================================================
@@ -1793,8 +1723,7 @@
             const checkoutBtn = document.getElementById('checkoutBtn');
             count.textContent = cart.length;
             if (cart.length === 0) {
-                itemsContainer.innerHTML =
-                    `<div class="cart-empty"><i class="fas fa-shopping-basket"></i><p>Tu carrito está vacío</p><p style="font-size:0.85rem;margin-top:10px">Agrega servicios para comenzar</p></div>`;
+                itemsContainer.innerHTML = `<div class="cart-empty"><i class="fas fa-shopping-basket"></i><p>Tu carrito está vacío</p><p style="font-size:0.85rem;margin-top:10px">Agrega servicios para comenzar</p></div>`;
                 totalEl.textContent = '$0.00 CUP';
                 checkoutBtn.disabled = true;
             } else {
@@ -1928,10 +1857,9 @@
             const msgEl = document.getElementById('toastMessage');
             const icon = toast.querySelector('i');
             msgEl.textContent = msg;
-            if (type === 'error') { icon.className = 'fas fa-exclamation-circle';
-                icon.style.color = '#ef4444'; } else if (type === 'warning') { icon.className = 'fas fa-info-circle';
-                icon.style.color = '#f59e0b'; } else { icon.className = 'fas fa-check-circle';
-                icon.style.color = 'var(--red)'; }
+            if (type === 'error') { icon.className = 'fas fa-exclamation-circle'; icon.style.color = '#ef4444'; }
+            else if (type === 'warning') { icon.className = 'fas fa-info-circle'; icon.style.color = '#f59e0b'; }
+            else { icon.className = 'fas fa-check-circle'; icon.style.color = 'var(--primary)'; }
             toast.classList.add('show');
             setTimeout(() => toast.classList.remove('show'), 3000);
         }
@@ -2011,7 +1939,7 @@
                 links.style.top = '70px';
                 links.style.left = '0';
                 links.style.right = '0';
-                links.style.background = 'rgba(10,10,10,0.98)';
+                links.style.background = 'rgba(10,14,26,0.98)';
                 links.style.padding = '20px';
                 links.style.gap = '15px';
                 links.style.borderBottom = '1px solid var(--border-color)';
@@ -2024,12 +1952,11 @@
         (function() {
             document.addEventListener('contextmenu', e => e.preventDefault());
             document.addEventListener('keydown', e => {
-                if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && ['I', 'J', 'C'].includes(e.key)) || (e.ctrlKey && e
-                        .key === 'u')) {
+                if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && ['I', 'J', 'C'].includes(e.key)) || (e.ctrlKey && e.key === 'u')) {
                     e.preventDefault();
                 }
             });
-            console.log('%c🔒 LD SmartLab', 'color:#e50914;font-size:24px;font-weight:bold');
+            console.log('%c🔒 LD SmartLab', 'color:#2563eb;font-size:24px;font-weight:bold');
             console.log('%cEsta página está protegida. Acceso no autorizado está prohibido.', 'color:#888;font-size:14px');
         })();
 
