@@ -2,118 +2,20 @@
 //  DATOS DE SERVICIOS (precios actualizados 2026)
 // ============================================================
 const services = [
-    {
-        id: 1,
-        name: "Reparación de Computadoras",
-        description: "Diagnóstico y reparación completa de equipos de escritorio y laptops. Precio base sin cambio de piezas. Si se requiere cambio de piezas, el costo adicional se cotiza según el tipo de pieza. Incluye limpieza interna, optimización del sistema y garantía de 30 días.",
-        price: 4500,
-        currency: "CUP",
-        image: "assets/img/reparacion-pc.jpg"
-    },
-    {
-        id: 2,
-        name: "Instalación de Redes Empresariales",
-        description: "Diseño e instalación de redes cableadas e inalámbricas para empresas de cualquier tamaño. Configuración de routers, switches, access points y cableado estructurado. Solución integral para conexiones de alta demanda, puede llegar hasta $120,000 CUP dependiendo de la complejidad (número de puntos, switches, etc.).",
-        price: 80000,
-        currency: "CUP",
-        image: "assets/img/redes-empresariales.jpg"
-    },
-    {
-        id: 3,
-        name: "Instalación de Redes Domésticas",
-        description: "Instalación de redes WiFi para hogares, cobertura total y configuración de routers y repetidores. Ideal para mejorar la conectividad en tu casa.",
-        price: 10000,
-        currency: "CUP",
-        image: "assets/img/redes-domesticas.jpg"
-    },
-    {
-        id: 4,
-        name: "Desarrollo Web Profesional",
-        description: "Creación de sitios web modernos, responsivos y optimizados para SEO. El precio puede variar según la complejidad del proyecto. Incluye diseño personalizado, panel administrativo, hosting y dominio por un año.",
-        price: 200000,
-        currency: "CUP",
-        image: "assets/img/desarrollo-web.jpg"
-    },
-    {
-        id: 5,
-        name: "Ciberseguridad Empresarial",
-        description: "Auditoría de seguridad, protección contra malware, firewall, VPN, análisis de vulnerabilidades y capacitación en seguridad informática para tu equipo para un nivel de auditoria básica",
-        price: 50000,
-        currency: "CUP",
-        image: "assets/img/ciberseguridad.jpg"
-    },
-    {
-        id: 6,
-        name: "Recuperación de Datos",
-        description: "Recuperación profesional de archivos eliminados o dañados de discos duros, memorias USB, tarjetas SD y otros dispositivos de almacenamiento. (Para casos simples)",
-        price: 10000,
-        currency: "CUP",
-        image: "assets/img/recuperacion-datos.jpg"
-    },
-    {
-        id: 7,
-        name: "Soporte IT Remoto",
-        description: "Asistencia técnica remota 24/7 para resolver problemas de software, virus, configuraciones, actualizaciones y cualquier incidencia informática. Si es cobro por incidencia $10,000 CUP. Si es por hora, $5,000 CUP/horas",
-        price: 5000,
-        currency: "CUP",
-        image: "assets/img/soporte-remoto.jpg"
-    },
-    {
-        id: 8,
-        name: "Desarrollo de Software a Medida",
-        description: "Aplicaciones personalizadas para tu negocio: sistemas de gestión, inventarios, facturación, CRM y cualquier solución que necesites. Precio desde $200,000 hasta $500,000 según requerimientos ya que un software a medida es un proyecto complejo.",
-        price: 200000,
-        currency: "CUP",
-        image: "assets/img/software-medida.jpg"
-    },
-    {
-        id: 9,
-        name: "Servicios en la Nube",
-        description: "Migración a la nube, configuración de servidores cloud, respaldos automáticos, almacenamiento seguro y acceso remoto a tus archivos desde cualquier lugar. (Para configuración y migración, con una cuota mensual de mantenimiento.)",
-        price: 50000,
-        currency: "CUP",
-        image: "assets/img/servicios-nube.jpg"
-    },
-    {
-        id: 10,
-        name: "Mantenimiento de Servidores",
-        description: "Monitoreo, actualización, respaldo y optimización de servidores físicos y virtuales. Garantizamos el 99.9% de uptime para tu infraestructura. Si es por visita, $8,500 CUP. Si es mensual, seran entre $15,000 - $25,000 CUP/mes.",
-        price: 8500,
-        currency: "CUP",
-        image: "assets/img/mantenimiento-servidores.jpg"
-    },
-    {
-        id: 11,
-        name: "Desarrollo de Apps Móviles",
-        description: "Aplicaciones nativas y multiplataforma para Android e iOS. Diseño UI/UX moderno, publicación en stores y soporte post-lanzamiento. El precio puede variar según la complejidad, ya que una app móvil básica puede costar $150,000 - $300,000 CUP.",
-        price: 100000,
-        currency: "CUP",
-        image: "assets/img/apps-moviles.jpg"
-    },
-    {
-        id: 12,
-        name: "Asesoría y Diseño de Tesis",
-        description: "Apoyo integral en la elaboración de tesis de grado y posgrado. Incluye asesoría metodológica, estructuración, análisis de datos, corrección de estilo y preparación para la defensa. Si es un paquete completo $15,000 CUP - básico $7,000 (informe de tesis y PowerPoint)",
-        price: 7000,
-        currency: "CUP",
-        image: "assets/img/asesoria-tesis.jpg"
-    },
-    {
-        id: 13,
-        name: "Marketing Digital",
-        description: "Estrategias de marketing para potenciar tu negocio en línea: gestión de redes sociales, publicidad en Google y Facebook, SEO, email marketing y análisis de métricas. El precio puede variar según el plan. (Si es un plan mensual, $20,000 CUP/Mes Si es un paquete semanal, $8,500 CUP/semanal.",
-        price: 20000,
-        currency: "CUP",
-        image: "assets/img/marketing-digital.jpg"
-    },
-    {
-        id: 14,
-        name: "Consultoría y Capacitación en IA",
-        description: "Instalación y configuración de herramientas de Inteligencia Artificial. Curso básico e intermedio sobre IA y sus aplicaciones en la vida cotidiana y empresarial. El precio puede variar según el nivel de capacitación. La capacitación en IA es un servicio de alta demanda. $20,000 CUP para el curso básico y $50,000 CUP para el intermedio.",
-        price: 20000,
-        currency: "CUP",
-        image: "assets/img/consultoria-ia.jpg"
-    }
+    { id: 1, name: "Reparación de Computadoras", description: "Diagnóstico y reparación completa de equipos de escritorio y laptops. Precio base sin cambio de piezas. Si se requiere cambio de piezas, el costo adicional se cotiza según el tipo de pieza. Incluye limpieza interna, optimización del sistema y garantía de 30 días.", price: 4500, currency: "CUP", image: "assets/img/reparacion-pc.jpg" },
+    { id: 2, name: "Instalación de Redes Empresariales", description: "Diseño e instalación de redes cableadas e inalámbricas para empresas de cualquier tamaño. Configuración de routers, switches, access points y cableado estructurado. Solución integral para conexiones de alta demanda, puede llegar hasta $120,000 CUP dependiendo de la complejidad (número de puntos, switches, etc.).", price: 80000, currency: "CUP", image: "assets/img/redes-empresariales.jpg" },
+    { id: 3, name: "Instalación de Redes Domésticas", description: "Instalación de redes WiFi para hogares, cobertura total y configuración de routers y repetidores. Ideal para mejorar la conectividad en tu casa.", price: 10000, currency: "CUP", image: "assets/img/redes-domesticas.jpg" },
+    { id: 4, name: "Desarrollo Web Profesional", description: "Creación de sitios web modernos, responsivos y optimizados para SEO. El precio puede variar según la complejidad del proyecto. Incluye diseño personalizado, panel administrativo, hosting y dominio por un año.", price: 200000, currency: "CUP", image: "assets/img/desarrollo-web.jpg" },
+    { id: 5, name: "Ciberseguridad Empresarial", description: "Auditoría de seguridad, protección contra malware, firewall, VPN, análisis de vulnerabilidades y capacitación en seguridad informática para tu equipo para un nivel de auditoria básica", price: 50000, currency: "CUP", image: "assets/img/ciberseguridad.jpg" },
+    { id: 6, name: "Recuperación de Datos", description: "Recuperación profesional de archivos eliminados o dañados de discos duros, memorias USB, tarjetas SD y otros dispositivos de almacenamiento. (Para casos simples)", price: 10000, currency: "CUP", image: "assets/img/recuperacion-datos.jpg" },
+    { id: 7, name: "Soporte IT Remoto", description: "Asistencia técnica remota 24/7 para resolver problemas de software, virus, configuraciones, actualizaciones y cualquier incidencia informática. Si es cobro por incidencia $10,000 CUP. Si es por hora, $5,000 CUP/horas", price: 5000, currency: "CUP", image: "assets/img/soporte-remoto.jpg" },
+    { id: 8, name: "Desarrollo de Software a Medida", description: "Aplicaciones personalizadas para tu negocio: sistemas de gestión, inventarios, facturación, CRM y cualquier solución que necesites. Precio desde $200,000 hasta $500,000 según requerimientos ya que un software a medida es un proyecto complejo.", price: 200000, currency: "CUP", image: "assets/img/software-medida.jpg" },
+    { id: 9, name: "Servicios en la Nube", description: "Migración a la nube, configuración de servidores cloud, respaldos automáticos, almacenamiento seguro y acceso remoto a tus archivos desde cualquier lugar. (Para configuración y migración, con una cuota mensual de mantenimiento.)", price: 50000, currency: "CUP", image: "assets/img/servicios-nube.jpg" },
+    { id: 10, name: "Mantenimiento de Servidores", description: "Monitoreo, actualización, respaldo y optimización de servidores físicos y virtuales. Garantizamos el 99.9% de uptime para tu infraestructura. Si es por visita, $8,500 CUP. Si es mensual, seran entre $15,000 - $25,000 CUP/mes.", price: 8500, currency: "CUP", image: "assets/img/mantenimiento-servidores.jpg" },
+    { id: 11, name: "Desarrollo de Apps Móviles", description: "Aplicaciones nativas y multiplataforma para Android e iOS. Diseño UI/UX moderno, publicación en stores y soporte post-lanzamiento. El precio puede variar según la complejidad, ya que una app móvil básica puede costar $150,000 - $300,000 CUP.", price: 100000, currency: "CUP", image: "assets/img/apps-moviles.jpg" },
+    { id: 12, name: "Asesoría y Diseño de Tesis", description: "Apoyo integral en la elaboración de tesis de grado y posgrado. Incluye asesoría metodológica, estructuración, análisis de datos, corrección de estilo y preparación para la defensa. Si es un paquete completo $15,000 CUP - básico $7,000 (informe de tesis y PowerPoint)", price: 7000, currency: "CUP", image: "assets/img/asesoria-tesis.jpg" },
+    { id: 13, name: "Marketing Digital", description: "Estrategias de marketing para potenciar tu negocio en línea: gestión de redes sociales, publicidad en Google y Facebook, SEO, email marketing y análisis de métricas. El precio puede variar según el plan. (Si es un plan mensual, $20,000 CUP/Mes Si es un paquete semanal, $8,500 CUP/semanal.", price: 20000, currency: "CUP", image: "assets/img/marketing-digital.jpg" },
+    { id: 14, name: "Consultoría y Capacitación en IA", description: "Instalación y configuración de herramientas de Inteligencia Artificial. Curso básico e intermedio sobre IA y sus aplicaciones en la vida cotidiana y empresarial. El precio puede variar según el nivel de capacitación. La capacitación en IA es un servicio de alta demanda. $20,000 CUP para el curso básico y $50,000 CUP para el intermedio.", price: 20000, currency: "CUP", image: "assets/img/consultoria-ia.jpg" }
 ];
 
 // ============================================================
@@ -149,23 +51,72 @@ const testimonials = [
 // ============================================================
 let cart = JSON.parse(localStorage.getItem('ldsmartlab_cart')) || [];
 
+// ============================================================
+//  RESEÑAS
+// ============================================================
+let reviews = JSON.parse(localStorage.getItem('ldsmartlab_reviews')) || [];
+
+function saveReviews() {
+    localStorage.setItem('ldsmartlab_reviews', JSON.stringify(reviews));
+}
+
+function getStarColor(rating) {
+    if (rating >= 5) return '#ffd700';
+    if (rating >= 4) return '#22c55e';
+    if (rating >= 3) return '#fbbf24';
+    if (rating >= 2) return '#f59e0b';
+    return '#ef4444';
+}
+
+function getServiceRating(serviceId) {
+    const sr = reviews.filter(r => r.serviceId === serviceId);
+    if (sr.length === 0) return { avg: 0, count: 0, label: 'Sin valoraciones', color: '#94a3b8' };
+    const sum = sr.reduce((a, r) => a + r.rating, 0);
+    const avg = sum / sr.length;
+    let label, color;
+    if (avg >= 4.6) { label = 'Premium'; color = '#ffd700'; }
+    else if (avg >= 4.0) { label = 'Muy bueno'; color = '#22c55e'; }
+    else if (avg >= 3.0) { label = 'Bueno'; color = '#fbbf24'; }
+    else if (avg >= 2.0) { label = 'Regular'; color = '#f59e0b'; }
+    else { label = 'Bajo'; color = '#ef4444'; }
+    return { avg: avg.toFixed(1), count: sr.length, label, color };
+}
+
+// ============================================================
+//  RENDER SERVICIOS
+// ============================================================
 function renderServices() {
     const grid = document.getElementById('servicesGrid');
-    grid.innerHTML = services.map((service, index) =>
-        `<div class="service-card animate" style="animation-delay:${index * 0.1}s">
+    grid.innerHTML = services.map((service, index) => {
+        const rating = getServiceRating(service.id);
+        const ratingHTML = rating.count > 0
+            ? `<span style="color:${rating.color};font-weight:700">★ ${rating.avg}</span>
+               <span style="font-size:0.8rem;color:var(--text-muted)">(${rating.count})</span>
+               <span class="rating-label" style="background:${rating.color}22;color:${rating.color}">${rating.label}</span>`
+            : `<span style="color:var(--text-muted);font-size:0.85rem">Sin valoraciones</span>`;
+        return `<div class="service-card animate" style="animation-delay:${index * 0.1}s">
             <img src="${service.image}" alt="${service.name}" class="service-img" loading="lazy">
             <div class="service-content">
+                <div class="service-rating">${ratingHTML}</div>
                 <h3>${service.name}</h3>
                 <p>${service.description}</p>
                 <div class="service-price">$${service.price.toFixed(2)} <span>${service.currency}</span></div>
-                <button class="add-to-cart" onclick="addToCart(${service.id},this)" id="btn-${service.id}">
-                    <i class="fas fa-cart-plus"></i> Agregar al Carrito
-                </button>
+                <div class="service-actions">
+                    <button class="add-to-cart" onclick="addToCart(${service.id},this)" id="btn-${service.id}">
+                        <i class="fas fa-cart-plus"></i> Agregar
+                    </button>
+                    <button class="review-btn" onclick="openReviewModal(${service.id})" title="Ver reseñas">
+                        <i class="fas fa-star"></i> Reseñas
+                    </button>
+                </div>
             </div>
-        </div>`
-    ).join('');
+        </div>`;
+    }).join('');
 }
 
+// ============================================================
+//  RENDER TESTIMONIOS
+// ============================================================
 function renderTestimonials() {
     const grid = document.getElementById('testimonialsGrid');
     grid.innerHTML = testimonials.map((t, index) =>
@@ -183,6 +134,74 @@ function renderTestimonials() {
     ).join('');
 }
 
+// ============================================================
+//  MODAL DE RESEÑAS
+// ============================================================
+function openReviewModal(serviceId) {
+    const service = services.find(s => s.id === serviceId);
+    if (!service) return;
+    const sr = reviews.filter(r => r.serviceId === serviceId);
+    const rating = getServiceRating(serviceId);
+
+    document.getElementById('reviewServiceName').textContent = service.name;
+    document.getElementById('reviewAverage').innerHTML = rating.count > 0
+        ? `<div style="display:flex;flex-direction:column;align-items:center;gap:5px">
+            <span style="color:${rating.color};font-size:2.5rem;font-family:Orbitron,sans-serif;font-weight:900">★ ${rating.avg}</span>
+            <span style="color:${rating.color};font-weight:700;text-transform:uppercase;letter-spacing:1px">${rating.label}</span>
+            <span style="color:var(--text-muted);font-size:0.9rem">Basado en ${rating.count} reseña${rating.count>1?'s':''}</span>
+           </div>`
+        : '<span style="color:var(--text-muted)">Sé el primero en valorar este servicio</span>';
+
+    document.getElementById('reviewsList').innerHTML = sr.length > 0
+        ? sr.slice().reverse().map(r => `
+            <div class="review-item">
+                <div class="review-header">
+                    <strong>${r.name}</strong>
+                    <span class="review-stars" style="color:${getStarColor(r.rating)}">${'★'.repeat(r.rating)}${'☆'.repeat(5 - r.rating)}</span>
+                </div>
+                <p>${r.comment}</p>
+                <small>${r.date}</small>
+            </div>`).join('')
+        : '<p style="color:var(--text-muted);text-align:center;padding:20px">No hay reseñas aún. ¡Sé el primero!</p>';
+
+    document.getElementById('reviewServiceId').value = serviceId;
+    document.getElementById('reviewForm').reset();
+    document.querySelectorAll('.star-rating input').forEach(i => i.checked = false);
+    document.getElementById('reviewModal').classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeReviewModal() {
+    document.getElementById('reviewModal').classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+function submitReview(e) {
+    e.preventDefault();
+    const serviceId = parseInt(document.getElementById('reviewServiceId').value);
+    const name = document.getElementById('reviewName').value.trim();
+    const ratingInput = document.querySelector('.star-rating input:checked');
+    const comment = document.getElementById('reviewComment').value.trim();
+    if (!name || !ratingInput || !comment) {
+        showToast('Por favor completa todos los campos', 'error');
+        return;
+    }
+    reviews.push({
+        serviceId,
+        name,
+        rating: parseInt(ratingInput.value),
+        comment,
+        date: new Date().toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })
+    });
+    saveReviews();
+    renderServices();
+    closeReviewModal();
+    showToast('¡Gracias por tu reseña!');
+}
+
+// ============================================================
+//  CARRITO
+// ============================================================
 function addToCart(serviceId, btn) {
     const service = services.find(s => s.id === serviceId);
     if (!service) return;
@@ -196,7 +215,7 @@ function addToCart(serviceId, btn) {
     btn.innerHTML = '<i class="fas fa-check"></i> Agregado';
     btn.classList.add('added');
     setTimeout(() => {
-        btn.innerHTML = '<i class="fas fa-cart-plus"></i> Agregar al Carrito';
+        btn.innerHTML = '<i class="fas fa-cart-plus"></i> Agregar';
         btn.classList.remove('added');
     }, 2000);
     showToast(`${service.name} agregado al carrito`);
@@ -288,6 +307,29 @@ function sendWhatsAppOrder(e) {
         return;
     }
     const total = cart.reduce((sum, item) => sum + item.price, 0);
+
+    // Guardar cliente (sin duplicados)
+    let clients = JSON.parse(localStorage.getItem('ldsmartlab_clients')) || [];
+    if (!clients.some(c => c.email === email)) {
+        clients.push({ name, phone, email, address, date: new Date().toLocaleDateString('es-ES') });
+        localStorage.setItem('ldsmartlab_clients', JSON.stringify(clients));
+    }
+
+    // Guardar pedido
+    let orders = JSON.parse(localStorage.getItem('ldsmartlab_orders')) || [];
+    orders.push({
+        clientName: name,
+        clientPhone: phone,
+        clientEmail: email,
+        clientAddress: address,
+        items: cart.map(i => ({ name: i.name, price: i.price })),
+        total,
+        payment,
+        notes,
+        date: new Date().toLocaleDateString('es-ES') + ' ' + new Date().toLocaleTimeString('es-ES')
+    });
+    localStorage.setItem('ldsmartlab_orders', JSON.stringify(orders));
+
     let message = `🛒 *NUEVO PEDIDO - LD SMARTLAB*\n\n`;
     message += `👤 *DATOS DEL CLIENTE*\n`;
     message += `Nombre: ${name}\n`;
@@ -362,7 +404,7 @@ function showToast(msg, type = 'success') {
 }
 
 // ============================================================
-//  TEMA CLARO / OSCURO (switch tipo píldora)
+//  TEMA CLARO / OSCURO
 // ============================================================
 function toggleTheme() {
     document.body.classList.toggle('light-mode');
@@ -418,6 +460,7 @@ function initNavbar() {
 
 function initParticles() {
     const container = document.getElementById('particles');
+    if (!container) return;
     for (let i = 0; i < 30; i++) {
         const p = document.createElement('div');
         p.className = 'particle';
@@ -450,20 +493,19 @@ function toggleMobileMenu() {
 }
 
 // ============================================================
-//  AÑO DINÁMICO Y FECHA DE ACTUALIZACIÓN EN EL FOOTER
+//  FECHAS FOOTER
 // ============================================================
 function initFooterDates() {
     const yearEl = document.getElementById('currentYear');
     const updateEl = document.getElementById('lastUpdate');
     if (yearEl) yearEl.textContent = new Date().getFullYear();
     if (updateEl) {
-        const now = new Date();
-        updateEl.textContent = now.toLocaleDateString('es-ES', { year: 'numeric', month: 'long' });
+        updateEl.textContent = new Date().toLocaleDateString('es-ES', { year: 'numeric', month: 'long' });
     }
 }
 
 // ============================================================
-//  SEGURIDAD BÁSICA Y AVISO LEGAL
+//  SEGURIDAD BÁSICA
 // ============================================================
 (function() {
     document.addEventListener('contextmenu', e => e.preventDefault());
@@ -474,7 +516,6 @@ function initFooterDates() {
     });
     console.log('%c🔒 LD SmartLab', 'color:#2563eb;font-size:24px;font-weight:bold');
     console.log('%c© 2026 LD SmartLab. Todos los derechos reservados.', 'color:#888;font-size:14px');
-    console.log('%cEste sitio web, su código fuente, diseño y contenidos están protegidos por las leyes de propiedad intelectual. Queda prohibida su reproducción total o parcial sin autorización por escrito del titular.', 'color:#888;font-size:12px');
 })();
 
 // ============================================================
@@ -490,4 +531,6 @@ document.addEventListener('DOMContentLoaded', () => {
     initFooterDates();
     loadTheme();
     document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+    // Cache de servicios para el panel admin
+    localStorage.setItem('ldsmartlab_services_cache', JSON.stringify(services));
 });
