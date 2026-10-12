@@ -106,8 +106,8 @@
         // Usuario y contraseña ofuscados con XOR (clave 0x5A = 90)
         // Usuario: root
         // Contraseña: Admin2010.*
-        const _u = [44, 57, 57, 40];                                  // "root"
-        const _p = [27, 62, 55, 51, 52, 104, 106, 107, 106, 116, 112]; // "Admin2010.*"
+        const _u = [44, 57, 57, 40];
+        const _p = [27, 62, 55, 51, 52, 104, 106, 107, 106, 116, 112];
         const _k = 90;
 
         function _dec(arr) {
@@ -157,9 +157,7 @@
             const pass = document.getElementById('adminPass').value;
 
             if (user === _dec(_u) && pass === _dec(_p)) {
-                // Login correcto
                 setAttempts({ count: 0, lockedUntil: 0 });
-                // Generar token de sesión
                 const token = btoa(Date.now() + '::' + Math.random() + '::' + _dec(_u));
                 sessionStorage.setItem('ldsmartlab_admin_session', token);
                 sessionStorage.setItem('ldsmartlab_admin_time', Date.now().toString());
@@ -167,7 +165,6 @@
                 document.getElementById('loginError').style.display = 'none';
                 document.getElementById('adminPass').value = '';
             } else {
-                // Login fallido
                 const a = getAttempts();
                 a.count++;
                 if (a.count >= MAX_ATTEMPTS) {
@@ -202,7 +199,6 @@
                 adminLogout();
                 return false;
             }
-            // Renovar tiempo en cada actividad
             sessionStorage.setItem('ldsmartlab_admin_time', Date.now().toString());
             return true;
         }
@@ -319,7 +315,7 @@
                     return `<tr>
                         <td>${svc ? svc.name : 'Servicio #' + r.serviceId}</td>
                         <td>${r.name}</td>
-                        <td style="color:#ffd700">${'★'.repeat(r.rating)}${'☆'.repeat(5 - r.rating)}</td>
+                        <td style="color:#fbbc04; letter-spacing:2px;">${'★'.repeat(r.rating)}${'☆'.repeat(5 - r.rating)}</td>
                         <td style="max-width:250px">${r.comment}</td>
                         <td>${r.date}</td>
                         <td><button class="delete-btn" onclick="deleteReview(${idx})" title="Eliminar"><i class="fas fa-trash-alt"></i></button></td>
@@ -344,7 +340,6 @@
                 showAdmin();
                 setInterval(updateSessionInfo, 1000);
             }
-            // Detectar actividad para renovar sesión
             ['click', 'keydown', 'mousemove'].forEach(evt => {
                 document.addEventListener(evt, () => {
                     if (sessionStorage.getItem('ldsmartlab_admin_session')) {
