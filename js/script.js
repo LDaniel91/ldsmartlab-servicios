@@ -60,26 +60,20 @@ function saveReviews() {
     localStorage.setItem('ldsmartlab_reviews', JSON.stringify(reviews));
 }
 
-function getStarColor(rating) {
-    if (rating >= 5) return '#ffd700';
-    if (rating >= 4) return '#22c55e';
-    if (rating >= 3) return '#fbbf24';
-    if (rating >= 2) return '#f59e0b';
-    return '#ef4444';
+// Genera estrellas estilo Google (★★★★★)
+function renderStars(avg) {
+    const rounded = Math.round(avg);
+    const full = '★'.repeat(rounded);
+    const empty = '☆'.repeat(5 - rounded);
+    return `<span style="color: #fbbc04; letter-spacing: 2px; font-size: 1.05rem;">${full}${empty}</span>`;
 }
 
 function getServiceRating(serviceId) {
     const sr = reviews.filter(r => r.serviceId === serviceId);
-    if (sr.length === 0) return { avg: 0, count: 0, label: 'Sin valoraciones', color: '#94a3b8' };
+    if (sr.length === 0) return { avg: 0, count: 0 };
     const sum = sr.reduce((a, r) => a + r.rating, 0);
     const avg = sum / sr.length;
-    let label, color;
-    if (avg >= 4.6) { label = 'Premium'; color = '#ffd700'; }
-    else if (avg >= 4.0) { label = 'Muy bueno'; color = '#22c55e'; }
-    else if (avg >= 3.0) { label = 'Bueno'; color = '#fbbf24'; }
-    else if (avg >= 2.0) { label = 'Regular'; color = '#f59e0b'; }
-    else { label = 'Bajo'; color = '#ef4444'; }
-    return { avg: avg.toFixed(1), count: sr.length, label, color };
+    return { avg: avg.toFixed(1), count: sr.length };
 }
 
 // ============================================================
@@ -89,15 +83,22 @@ function renderServices() {
     const grid = document.getElementById('servicesGrid');
     grid.innerHTML = services.map((service, index) => {
         const rating = getServiceRating(service.id);
-        const ratingHTML = rating.count > 0
-            ? `<span style="color:${rating.color};font-weight:700">★ ${rating.avg}</span>
-               <span style="font-size:0.8rem;color:var(--text-muted)">(${rating.count})</span>
-               <span class="rating-label" style="background:${rating.color}22;color:${rating.color}">${rating.label}</span>`
-            : `<span style="color:var(--text-muted);font-size:0.85rem">Sin valoraciones</span>`;
+        let ratingHTML = '';
+        if (rating.count > 0) {
+            ratingHTML = `
+                <div class="service-rating">
+                    ${renderStars(rating.avg)}
+                    <span class="rating-number">${rating.avg}</span>
+                    <span class="rating-count">(${rating.count})</span>
+                </div>`;
+        } else {
+            ratingHTML = `<div class="service-rating"><span class="rating-count">Sin valoraciones</span></div>`;
+        }
+
         return `<div class="service-card animate" style="animation-delay:${index * 0.1}s">
             <img src="${service.image}" alt="${service.name}" class="service-img" loading="lazy">
             <div class="service-content">
-                <div class="service-rating">${ratingHTML}</div>
+                ${ratingHTML}
                 <h3>${service.name}</h3>
                 <p>${service.description}</p>
                 <div class="service-price">$${service.price.toFixed(2)} <span>${service.currency}</span></div>
@@ -144,20 +145,32 @@ function openReviewModal(serviceId) {
     const rating = getServiceRating(serviceId);
 
     document.getElementById('reviewServiceName').textContent = service.name;
-    document.getElementById('reviewAverage').innerHTML = rating.count > 0
-        ? `<div style="display:flex;flex-direction:column;align-items:center;gap:5px">
-            <span style="color:${rating.color};font-size:2.5rem;font-family:Orbitron,sans-serif;font-weight:900">★ ${rating.avg}</span>
-            <span style="color:${rating.color};font-weight:700;text-transform:uppercase;letter-spacing:1px">${rating.label}</span>
-            <span style="color:var(--text-muted);font-size:0.9rem">Basado en ${rating.count} reseña${rating.count>1?'s':''}</span>
-           </div>`
-        : '<span style="color:var(--text-muted)">Sé el primero en valorar este servicio</span>';
+
+    if (rating.count > 0) {
+        const fullStars = Math.round(rating.avg);
+        const emptyStars = 5 - fullStars;
+        document.getElementById('reviewAverage').innerHTML = `
+            <div style="display:flex; flex-direction:column; align-items:center; gap:5px;">
+                <div style="font-size: 2.5rem; color: #fbbc04; letter-spacing: 4px;">
+                    ${'★'.repeat(fullStars)}${'☆'.repeat(emptyStars)}
+                </div>
+                <div style="font-size: 1.8rem; font-weight: 900; color: var(--text-primary); font-family: Orbitron, sans-serif;">
+                    ${rating.avg}
+                </div>
+                <div style="color: var(--text-muted); font-size: 0.9rem;">
+                    Basado en ${rating.count} reseña${rating.count > 1 ? 's' : ''}
+                </div>
+            </div>`;
+    } else {
+        document.getElementById('reviewAverage').innerHTML = '<span style="color:var(--text-muted)">Sé el primero en valorar este servicio</span>';
+    }
 
     document.getElementById('reviewsList').innerHTML = sr.length > 0
         ? sr.slice().reverse().map(r => `
             <div class="review-item">
                 <div class="review-header">
                     <strong>${r.name}</strong>
-                    <span class="review-stars" style="color:${getStarColor(r.rating)}">${'★'.repeat(r.rating)}${'☆'.repeat(5 - r.rating)}</span>
+                    <span class="review-stars" style="color: #fbbc04; letter-spacing: 2px;">${'★'.repeat(r.rating)}${'☆'.repeat(5 - r.rating)}</span>
                 </div>
                 <p>${r.comment}</p>
                 <small>${r.date}</small>
@@ -308,14 +321,12 @@ function sendWhatsAppOrder(e) {
     }
     const total = cart.reduce((sum, item) => sum + item.price, 0);
 
-    // Guardar cliente (sin duplicados)
     let clients = JSON.parse(localStorage.getItem('ldsmartlab_clients')) || [];
     if (!clients.some(c => c.email === email)) {
         clients.push({ name, phone, email, address, date: new Date().toLocaleDateString('es-ES') });
         localStorage.setItem('ldsmartlab_clients', JSON.stringify(clients));
     }
 
-    // Guardar pedido
     let orders = JSON.parse(localStorage.getItem('ldsmartlab_orders')) || [];
     orders.push({
         clientName: name,
@@ -531,6 +542,5 @@ document.addEventListener('DOMContentLoaded', () => {
     initFooterDates();
     loadTheme();
     document.getElementById('themeToggle').addEventListener('click', toggleTheme);
-    // Cache de servicios para el panel admin
     localStorage.setItem('ldsmartlab_services_cache', JSON.stringify(services));
 });
