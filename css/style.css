@@ -15,6 +15,7 @@
     --primary-glow: rgba(37, 99, 235, 0.4);
     --shadow: 0 20px 50px rgba(37, 99, 235, 0.15);
     --transition: 0.3s ease;
+    --google-star: #fbbc04;
 }
 
 body.light-mode {
@@ -248,14 +249,16 @@ body.light-mode .hero { background: linear-gradient(135deg, #e2e8f0 0%, #f8fafc 
 .add-to-cart:hover { background: var(--primary-light); box-shadow: 0 0 25px var(--primary-glow); }
 .add-to-cart.added { background: #22c55e; }
 
-/* ===== RESEÑAS ===== */
+/* ===== RESEÑAS ESTILO GOOGLE ===== */
 .service-rating {
     display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
-    font-size: 1rem; font-weight: 700; margin-bottom: 10px; min-height: 24px;
+    font-size: 0.95rem; margin-bottom: 10px; min-height: 24px;
 }
-.rating-label {
-    font-size: 0.7rem; padding: 3px 10px; border-radius: 20px;
-    font-weight: 900; text-transform: uppercase; letter-spacing: 0.8px;
+.rating-number {
+    font-weight: 700; color: var(--text-primary); font-size: 1rem;
+}
+.rating-count {
+    color: var(--text-muted); font-size: 0.85rem;
 }
 .service-actions { display: flex; gap: 10px; margin-top: 15px; }
 .service-actions .add-to-cart { flex: 1; }
@@ -266,7 +269,7 @@ body.light-mode .hero { background: linear-gradient(135deg, #e2e8f0 0%, #f8fafc 
     cursor: pointer; transition: all var(--transition);
     display: flex; align-items: center; gap: 6px; white-space: nowrap;
 }
-.review-btn:hover { border-color: #ffd700; color: #ffd700; box-shadow: 0 0 15px rgba(255,215,0,0.2); }
+.review-btn:hover { border-color: var(--google-star); color: var(--google-star); box-shadow: 0 0 15px rgba(251, 188, 4, 0.2); }
 
 /* Modal de reseñas */
 .review-modal {
@@ -311,7 +314,7 @@ body.light-mode .hero { background: linear-gradient(135deg, #e2e8f0 0%, #f8fafc 
 .star-rating label { font-size: 2.2rem; color: var(--border-color); cursor: pointer; transition: color 0.2s, transform 0.2s; }
 .star-rating input:checked ~ label,
 .star-rating label:hover,
-.star-rating label:hover ~ label { color: #ffd700; transform: scale(1.1); }
+.star-rating label:hover ~ label { color: var(--google-star); transform: scale(1.1); }
 
 /* ===== MISIÓN Y VISIÓN ===== */
 .mission-vision { background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%); transition: background var(--transition); }
@@ -351,7 +354,7 @@ body.light-mode .hero { background: linear-gradient(135deg, #e2e8f0 0%, #f8fafc 
     content: '"'; position: absolute; top: 10px; right: 20px;
     font-size: 4rem; color: var(--primary); opacity: 0.2; font-family: serif;
 }
-.stars { color: #fbbf24; margin-bottom: 15px; font-size: 0.9rem; }
+.stars { color: var(--google-star); margin-bottom: 15px; font-size: 0.9rem; }
 .testimonial-text { color: var(--text-secondary); line-height: 1.7; margin-bottom: 20px; font-size: 0.95rem; }
 .testimonial-author { display: flex; align-items: center; gap: 15px; }
 .author-avatar {
