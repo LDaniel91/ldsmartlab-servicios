@@ -103,16 +103,11 @@
         // ==========================================================
         //  CONFIGURACIÓN DE SEGURIDAD
         // ==========================================================
-        // Usuario y contraseña ofuscados con XOR (clave 0x5A = 90)
-        // Usuario: root
-        // Contraseña: Admin2010.*
-        const _u = [44, 57, 57, 40];
-        const _p = [27, 62, 55, 51, 52, 104, 106, 107, 106, 116, 112];
-        const _k = 90;
-
-        function _dec(arr) {
-            return arr.map(c => String.fromCharCode(c ^ _k)).join('');
-        }
+        // Credenciales codificadas en Base64 (no visibles en texto plano)
+        // Usuario real: root  →  Base64: cm9vdA==
+        // Contraseña real: Admin2010.*  →  Base64: QWRtaW4yMDEwLio=
+        const _u = atob('cm9vdA==');
+        const _p = atob('QWRtaW4yMDEwLio=');
 
         const MAX_ATTEMPTS = 5;
         const LOCKOUT_MINUTES = 15;
@@ -153,18 +148,21 @@
             e.preventDefault();
             if (isLocked()) return;
 
-            const user = document.getElementById('adminUser').value;
+            const user = document.getElementById('adminUser').value.trim();
             const pass = document.getElementById('adminPass').value;
 
-            if (user === _dec(_u) && pass === _dec(_p)) {
+            if (user === _u && pass === _p) {
+                // Login correcto
                 setAttempts({ count: 0, lockedUntil: 0 });
-                const token = btoa(Date.now() + '::' + Math.random() + '::' + _dec(_u));
+                const token = btoa(Date.now() + '::' + Math.random() + '::' + _u);
                 sessionStorage.setItem('ldsmartlab_admin_session', token);
                 sessionStorage.setItem('ldsmartlab_admin_time', Date.now().toString());
                 showAdmin();
                 document.getElementById('loginError').style.display = 'none';
+                document.getElementById('attemptsWarning').style.display = 'none';
                 document.getElementById('adminPass').value = '';
             } else {
+                // Login fallido
                 const a = getAttempts();
                 a.count++;
                 if (a.count >= MAX_ATTEMPTS) {
