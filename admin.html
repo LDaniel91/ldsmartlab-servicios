@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Panel de Administración | LD SmartLab</title>
+    <link rel="icon" type="image/jpeg" href="assets/img/logo.jpg">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <nav class="navbar" id="navbar">
+        <a href="index.html" class="logo">
+            <img src="assets/img/logo.jpg" alt="LD SmartLab" class="logo-img">
+            LD <span>SmartLab</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html">← Volver al Sitio</a></li>
+        </ul>
+    </nav>
+
+    <!-- ===== LOGIN ===== -->
+    <div class="admin-container" id="loginView">
+        <div class="login-box">
+            <h2><i class="fas fa-lock"></i> Acceso Restringido</h2>
+            <form onsubmit="adminLogin(event)">
+                <div class="form-group">
+                    <label><i class="fas fa-user"></i> Usuario</label>
+                    <input type="text" id="adminUser" placeholder="Usuario" autocomplete="off" required>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-key"></i> Contraseña</label>
+                    <input type="password" id="adminPass" placeholder="••••••••" autocomplete="off" required>
+                </div>
+                <button type="submit" class="submit-btn"><i class="fas fa-sign-in-alt"></i> Ingresar</button>
+            </form>
+            <p id="loginError" class="login-error"><i class="fas fa-exclamation-triangle"></i> Credenciales incorrectas</p>
+            <p id="attemptsWarning" class="attempts-warning"></p>
+        </div>
+    </div>
+
+    <!-- ===== PANEL ===== -->
+    <div class="admin-container" id="adminView" style="display:none">
+        <div class="admin-header">
+            <h1><i class="fas fa-shield-alt"></i> Panel de Administración</h1>
+            <button class="btn-logout" onclick="adminLogout()"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</button>
+        </div>
+
+        <div class="session-info">
+            <span><i class="fas fa-clock"></i> Sesión activa: <strong id="sessionTime">--:--</strong></span>
+            <span><i class="fas fa-hourglass-half"></i> Expira en: <strong id="sessionExpiry">--:--</strong></span>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <i class="fas fa-users"></i>
+                <h3 id="statClients">0</h3>
+                <p>Clientes</p>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-shopping-bag"></i>
+                <h3 id="statOrders">0</h3>
+                <p>Pedidos</p>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-star"></i>
+                <h3 id="statReviews">0</h3>
+                <p>Reseñas</p>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-dollar-sign"></i>
+                <h3 id="statRevenue">0</h3>
+                <p>CUP Ingresos</p>
+            </div>
+        </div>
+
+        <div class="admin-tabs">
+            <button class="admin-tab active" onclick="showTab('clients', this)"><i class="fas fa-users"></i> Clientes</button>
+            <button class="admin-tab" onclick="showTab('orders', this)"><i class="fas fa-shopping-bag"></i> Pedidos</button>
+            <button class="admin-tab" onclick="showTab('reviews', this)"><i class="fas fa-star"></i> Reseñas</button>
+        </div>
+
+        <div class="admin-panel active" id="panel-clients">
+            <h3 style="margin-bottom:15px;color:var(--text-primary);font-family:Orbitron,sans-serif;font-size:1.1rem">Clientes Registrados</h3>
+            <div id="clientsTable"></div>
+        </div>
+
+        <div class="admin-panel" id="panel-orders">
+            <h3 style="margin-bottom:15px;color:var(--text-primary);font-family:Orbitron,sans-serif;font-size:1.1rem">Historial de Pedidos</h3>
+            <div id="ordersTable"></div>
+        </div>
+
+        <div class="admin-panel" id="panel-reviews">
+            <h3 style="margin-bottom:15px;color:var(--text-primary);font-family:Orbitron,sans-serif;font-size:1.1rem">Todas las Reseñas</h3>
+            <div id="reviewsTable"></div>
+        </div>
+    </div>
+
+    <script>
+        // ==========================================================
+        //  CONFIGURACIÓN DE SEGURIDAD
+        // ==========================================================
+        // Usuario y contraseña ofuscados con XOR (clave 0x5A = 90)
+        // Usuario: root
+        // Contraseña: Admin2010.*
+        const _u = [44, 57, 57, 40];                                  // "root"
+        const _p = [27, 62, 55, 51, 52, 104, 106, 107, 106, 116, 112]; // "Admin2010.*"
+        const _k = 90;
+
+        function _dec(arr) {
+            return arr.map(c => String.fromCharCode(c ^ _k)).join('');
+        }
+
+        const MAX_ATTEMPTS = 5;
+        const LOCKOUT_MINUTES = 15;
+        const SESSION_MINUTES = 30;
+
+        // ==========================================================
+        //  CONTROL DE INTENTOS (anti fuerza bruta)
+        // ==========================================================
+        function getAttempts() {
+            try {
+                return JSON.parse(localStorage.getItem('ldsmartlab_login_attempts')) || { count: 0, lockedUntil: 0 };
+            } catch { return { count: 0, lockedUntil: 0 }; }
+        }
+
+        function setAttempts(data) {
+            localStorage.setItem('ldsmartlab_login_attempts', JSON.stringify(data));
+        }
+
+        function isLocked() {
+            const a = getAttempts();
+            if (a.lockedUntil && Date.now() < a.lockedUntil) {
+                const mins = Math.ceil((a.lockedUntil - Date.now()) / 60000);
+                document.getElementById('attemptsWarning').textContent = `🔒 Bloqueado. Intenta de nuevo en ${mins} min.`;
+                document.getElementById('attemptsWarning').style.display = 'block';
+                return true;
+            }
+            if (a.lockedUntil && Date.now() >= a.lockedUntil) {
+                setAttempts({ count: 0, lockedUntil: 0 });
+                document.getElementById('attemptsWarning').style.display = 'none';
+            }
+            return false;
+        }
+
+        // ==========================================================
+        //  LOGIN
+        // ==========================================================
+        function adminLogin(e) {
+            e.preventDefault();
+            if (isLocked()) return;
+
+            const user = document.getElementById('adminUser').value;
+            const pass = document.getElementById('adminPass').value;
+
+            if (user === _dec(_u) && pass === _dec(_p)) {
+                // Login correcto
+                setAttempts({ count: 0, lockedUntil: 0 });
+                // Generar token de sesión
+                const token = btoa(Date.now() + '::' + Math.random() + '::' + _dec(_u));
+                sessionStorage.setItem('ldsmartlab_admin_session', token);
+                sessionStorage.setItem('ldsmartlab_admin_time', Date.now().toString());
+                showAdmin();
+                document.getElementById('loginError').style.display = 'none';
+                document.getElementById('adminPass').value = '';
+            } else {
+                // Login fallido
+                const a = getAttempts();
+                a.count++;
+                if (a.count >= MAX_ATTEMPTS) {
+                    a.lockedUntil = Date.now() + LOCKOUT_MINUTES * 60000;
+                    a.count = 0;
+                    setAttempts(a);
+                    isLocked();
+                } else {
+                    setAttempts(a);
+                    const err = document.getElementById('loginError');
+                    err.style.display = 'block';
+                    err.classList.remove('shake');
+                    void err.offsetWidth;
+                    err.classList.add('shake');
+                    document.getElementById('attemptsWarning').textContent =
+                        `⚠️ Intentos restantes: ${MAX_ATTEMPTS - a.count}`;
+                    document.getElementById('attemptsWarning').style.display = 'block';
+                }
+                document.getElementById('adminPass').value = '';
+            }
+        }
+
+        // ==========================================================
+        //  SESIÓN
+        // ==========================================================
+        function checkSession() {
+            const token = sessionStorage.getItem('ldsmartlab_admin_session');
+            const time = sessionStorage.getItem('ldsmartlab_admin_time');
+            if (!token || !time) return false;
+            const elapsed = (Date.now() - parseInt(time)) / 60000;
+            if (elapsed > SESSION_MINUTES) {
+                adminLogout();
+                return false;
+            }
+            // Renovar tiempo en cada actividad
+            sessionStorage.setItem('ldsmartlab_admin_time', Date.now().toString());
+            return true;
+        }
+
+        function adminLogout() {
+            sessionStorage.removeItem('ldsmartlab_admin_session');
+            sessionStorage.removeItem('ldsmartlab_admin_time');
+            document.getElementById('adminView').style.display = 'none';
+            document.getElementById('loginView').style.display = 'block';
+        }
+
+        function showAdmin() {
+            if (!checkSession()) return;
+            document.getElementById('loginView').style.display = 'none';
+            document.getElementById('adminView').style.display = 'block';
+            loadStats();
+            loadClients();
+            loadOrders();
+            loadReviews();
+            updateSessionInfo();
+        }
+
+        function updateSessionInfo() {
+            const time = parseInt(sessionStorage.getItem('ldsmartlab_admin_time')) || Date.now();
+            const elapsed = Math.floor((Date.now() - time) / 1000);
+            const remaining = Math.max(0, SESSION_MINUTES * 60 - elapsed);
+            const hh = String(Math.floor(elapsed / 3600)).padStart(2, '0');
+            const mm = String(Math.floor((elapsed % 3600) / 60)).padStart(2, '0');
+            const ss = String(elapsed % 60).padStart(2, '0');
+            const rhh = String(Math.floor(remaining / 3600)).padStart(2, '0');
+            const rmm = String(Math.floor((remaining % 3600) / 60)).padStart(2, '0');
+            const rss = String(remaining % 60).padStart(2, '0');
+            document.getElementById('sessionTime').textContent = `${hh}:${mm}:${ss}`;
+            document.getElementById('sessionExpiry').textContent = `${rhh}:${rmm}:${rss}`;
+            if (remaining <= 0) {
+                adminLogout();
+                alert('Tu sesión ha expirado. Vuelve a iniciar sesión.');
+                return;
+            }
+        }
+
+        // ==========================================================
+        //  CARGA DE DATOS
+        // ==========================================================
+        function loadStats() {
+            const clients = JSON.parse(localStorage.getItem('ldsmartlab_clients')) || [];
+            const orders = JSON.parse(localStorage.getItem('ldsmartlab_orders')) || [];
+            const reviews = JSON.parse(localStorage.getItem('ldsmartlab_reviews')) || [];
+            const revenue = orders.reduce((s, o) => s + (o.total || 0), 0);
+            document.getElementById('statClients').textContent = clients.length;
+            document.getElementById('statOrders').textContent = orders.length;
+            document.getElementById('statReviews').textContent = reviews.length;
+            document.getElementById('statRevenue').textContent = revenue.toLocaleString('es-ES');
+        }
+
+        function showTab(tab, btn) {
+            document.querySelectorAll('.admin-panel').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
+            document.getElementById('panel-' + tab).classList.add('active');
+            btn.classList.add('active');
+        }
+
+        function loadClients() {
+            const clients = JSON.parse(localStorage.getItem('ldsmartlab_clients')) || [];
+            const c = document.getElementById('clientsTable');
+            if (clients.length === 0) {
+                c.innerHTML = '<div class="empty-state"><i class="fas fa-users"></i>No hay clientes registrados aún.</div>';
+                return;
+            }
+            c.innerHTML = `<table class="admin-table">
+                <thead><tr><th>#</th><th>Nombre</th><th>Teléfono</th><th>Email</th><th>Dirección</th><th>Fecha Registro</th></tr></thead>
+                <tbody>${clients.map((cl, i) => `<tr>
+                    <td>${i + 1}</td>
+                    <td>${cl.name}</td>
+                    <td>${cl.phone}</td>
+                    <td>${cl.email}</td>
+                    <td>${cl.address}</td>
+                    <td>${cl.date}</td>
+                </tr>`).join('')}</tbody></table>`;
+        }
+
+        function loadOrders() {
+            const orders = JSON.parse(localStorage.getItem('ldsmartlab_orders')) || [];
+            const c = document.getElementById('ordersTable');
+            if (orders.length === 0) {
+                c.innerHTML = '<div class="empty-state"><i class="fas fa-shopping-bag"></i>No hay pedidos registrados aún.</div>';
+                return;
+            }
+            c.innerHTML = `<table class="admin-table">
+                <thead><tr><th>#</th><th>Cliente</th><th>Teléfono</th><th>Servicios</th><th>Total</th><th>Pago</th><th>Fecha</th></tr></thead>
+                <tbody>${orders.map((o, i) => `<tr>
+                    <td>${i + 1}</td>
+                    <td>${o.clientName}</td>
+                    <td>${o.clientPhone}</td>
+                    <td>${o.items.map(x => x.name).join(', ')}</td>
+                    <td><strong style="color:var(--primary)">$${o.total.toFixed(2)} CUP</strong></td>
+                    <td>${o.payment.toUpperCase()}</td>
+                    <td>${o.date}</td>
+                </tr>`).join('')}</tbody></table>`;
+        }
+
+        function loadReviews() {
+            const reviews = JSON.parse(localStorage.getItem('ldsmartlab_reviews')) || [];
+            const services = JSON.parse(localStorage.getItem('ldsmartlab_services_cache')) || [];
+            const c = document.getElementById('reviewsTable');
+            if (reviews.length === 0) {
+                c.innerHTML = '<div class="empty-state"><i class="fas fa-star"></i>No hay reseñas aún.</div>';
+                return;
+            }
+            c.innerHTML = `<table class="admin-table">
+                <thead><tr><th>Servicio</th><th>Cliente</th><th>Estrellas</th><th>Comentario</th><th>Fecha</th><th>Acción</th></tr></thead>
+                <tbody>${reviews.map((r, idx) => {
+                    const svc = services.find(s => s.id === r.serviceId);
+                    return `<tr>
+                        <td>${svc ? svc.name : 'Servicio #' + r.serviceId}</td>
+                        <td>${r.name}</td>
+                        <td style="color:#ffd700">${'★'.repeat(r.rating)}${'☆'.repeat(5 - r.rating)}</td>
+                        <td style="max-width:250px">${r.comment}</td>
+                        <td>${r.date}</td>
+                        <td><button class="delete-btn" onclick="deleteReview(${idx})" title="Eliminar"><i class="fas fa-trash-alt"></i></button></td>
+                    </tr>`;
+                }).join('')}</tbody></table>`;
+        }
+
+        function deleteReview(index) {
+            if (!confirm('¿Eliminar esta reseña permanentemente?')) return;
+            let reviews = JSON.parse(localStorage.getItem('ldsmartlab_reviews')) || [];
+            reviews.splice(index, 1);
+            localStorage.setItem('ldsmartlab_reviews', JSON.stringify(reviews));
+            loadReviews();
+            loadStats();
+        }
+
+        // ==========================================================
+        //  INICIALIZACIÓN
+        // ==========================================================
+        document.addEventListener('DOMContentLoaded', () => {
+            if (checkSession()) {
+                showAdmin();
+                setInterval(updateSessionInfo, 1000);
+            }
+            // Detectar actividad para renovar sesión
+            ['click', 'keydown', 'mousemove'].forEach(evt => {
+                document.addEventListener(evt, () => {
+                    if (sessionStorage.getItem('ldsmartlab_admin_session')) {
+                        sessionStorage.setItem('ldsmartlab_admin_time', Date.now().toString());
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

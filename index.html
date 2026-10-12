@@ -202,8 +202,8 @@
                     <li><a href="#mision">Misión y Visión</a></li>
                     <li><a href="#testimonios">Testimonios</a></li>
                     <li><a href="#contacto">Contacto</a></li>
-                    <li><a href="#">Política de Privacidad</a></li>
-                    <li><a href="#">Términos de Servicio</a></li>
+                    <li><a href="legal/politica-privacidad.html">Política de Privacidad</a></li>
+                    <li><a href="legal/terminos-servicio.html">Términos de Servicio</a></li>
                 </ul>
             </div>
             <div class="footer-col">
@@ -216,7 +216,6 @@
             </div>
         </div>
 
-        <!-- ===== DERECHOS DE AUTOR Y LICENCIA ===== -->
         <div class="footer-bottom">
             <div class="footer-bottom-content">
                 <p class="copyright-line">
@@ -327,6 +326,40 @@
                 <button type="submit" class="whatsapp-btn" id="sendOrderBtn">
                     <i class="fab fa-whatsapp"></i> Enviar Pedido por WhatsApp
                 </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ===== MODAL DE RESEÑAS ===== -->
+    <div class="review-modal" id="reviewModal">
+        <div class="review-content">
+            <button class="close-review" onclick="closeReviewModal()"><i class="fas fa-times"></i></button>
+            <h2><i class="fas fa-star" style="color:#ffd700"></i> Reseñas de<br><span id="reviewServiceName" style="color:var(--primary)"></span></h2>
+            <div id="reviewAverage" class="review-average"></div>
+            <div id="reviewsList" class="reviews-list"></div>
+            <hr style="border-color:var(--border-color);margin:25px 0">
+            <h3><i class="fas fa-pen"></i> Deja tu reseña</h3>
+            <form id="reviewForm" onsubmit="submitReview(event)">
+                <input type="hidden" id="reviewServiceId">
+                <div class="form-group">
+                    <label>Tu Nombre <span class="required">*</span></label>
+                    <input type="text" id="reviewName" placeholder="Ej: Juan Pérez" required>
+                </div>
+                <div class="form-group">
+                    <label>Valoración <span class="required">*</span></label>
+                    <div class="star-rating">
+                        <input type="radio" name="rating" value="5" id="star5"><label for="star5">★</label>
+                        <input type="radio" name="rating" value="4" id="star4"><label for="star4">★</label>
+                        <input type="radio" name="rating" value="3" id="star3"><label for="star3">★</label>
+                        <input type="radio" name="rating" value="2" id="star2"><label for="star2">★</label>
+                        <input type="radio" name="rating" value="1" id="star1"><label for="star1">★</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Comentario <span class="required">*</span></label>
+                    <textarea id="reviewComment" placeholder="Cuéntanos tu experiencia..." required></textarea>
+                </div>
+                <button type="submit" class="submit-btn"><i class="fas fa-paper-plane"></i> Enviar Reseña</button>
             </form>
         </div>
     </div>
