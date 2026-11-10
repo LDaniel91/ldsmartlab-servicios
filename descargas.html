@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Descarga las aplicaciones Android oficiales de LD SmartLab">
+    <title>Descargar Apps | LD SmartLab</title>
+    <link rel="icon" type="image/jpeg" href="assets/img/logo.jpg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- ===== NAVBAR ===== -->
+    <nav class="navbar" id="navbar">
+        <a href="index.html" class="logo">
+            <img src="assets/img/logo.jpg" alt="LD SmartLab" class="logo-img">
+            LD <span>SmartLab</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="index.html#servicios">Servicios</a></li>
+            <li><a href="index.html#contacto">Contacto</a></li>
+            <li><a href="descargas.html" style="color:var(--primary)">Apps</a></li>
+            <li>
+                <button class="theme-switch" id="themeToggle" title="Cambiar tema" aria-label="Cambiar tema">
+                    <span class="switch-track">
+                        <span class="switch-label">ON</span>
+                        <span class="switch-thumb"><i class="fas fa-moon"></i></span>
+                    </span>
+                </button>
+            </li>
+        </ul>
+        <button class="mobile-menu-btn" onclick="toggleMobileMenu()"><i class="fas fa-bars"></i></button>
+    </nav>
+
+    <!-- ===== DESCARGAS ===== -->
+    <section class="section apps-section" id="descargas">
+        <div class="section-title animate visible">
+            <h2>Descargar <span>Aplicaciones</span></h2>
+            <p>Nuestras apps Android oficiales, 100% gratuitas y sin publicidad</p>
+            <div class="line"></div>
+        </div>
+
+        <div class="apps-grid">
+
+            <!-- ===== APP 1: LD SmartLab Market ===== -->
+            <div class="app-card">
+                <div class="app-icon-wrapper">
+                    <i class="fas fa-store"></i>
+                </div>
+                <h3>LD SmartLab Market</h3>
+                <p>Tu tienda de servicios informáticos en el bolsillo. Consulta precios, contrata servicios y contacta con nosotros desde cualquier lugar.</p>
+                <div class="app-meta">
+                    <span class="app-badge"><i class="fas fa-tag"></i> v1.0.0</span>
+                    <span class="app-badge"><i class="fab fa-android"></i> Android</span>
+                    <span class="app-badge"><i class="fas fa-check-circle"></i> Gratis</span>
+                </div>
+                <a href="https://github.com/LDaniel91/ldsmartlab-servicios/releases/latest/download/LD_SMARTLAB_MARKET_v1.0.0_1794276886465.apk"
+                   class="download-btn"
+                   title="Descargar LD SmartLab Market APK">
+                    <i class="fas fa-download"></i> Descargar APK
+                </a>
+            </div>
+
+            <!-- ===== APP 2: Portal Paciente HMCD ===== -->
+            <div class="app-card">
+                <div class="app-icon-wrapper">
+                    <i class="fas fa-hospital-user"></i>
+                </div>
+                <h3>Portal Paciente HMCD</h3>
+                <p>Accede a tu historial médico, gestiona citas y comunícate con tu médico de forma segura desde tu dispositivo Android.</p>
+                <div class="app-meta">
+                    <span class="app-badge"><i class="fas fa-tag"></i> v1.0</span>
+                    <span class="app-badge"><i class="fab fa-android"></i> Android</span>
+                    <span class="app-badge"><i class="fas fa-check-circle"></i> Gratis</span>
+                </div>
+                <a href="https://github.com/LDaniel91/ldsmartlab-servicios/releases/latest/download/Portal_Paciente_HMCD_v1_0_v1.0_1792633779057.apk"
+                   class="download-btn"
+                   title="Descargar Portal Paciente HMCD APK">
+                    <i class="fas fa-download"></i> Descargar APK
+                </a>
+            </div>
+
+        </div>
+
+        <!-- ===== INSTRUCCIONES DE INSTALACIÓN ===== -->
+        <div class="apps-info">
+            <h3><i class="fas fa-question-circle"></i> ¿Cómo instalar un archivo APK?</h3>
+            <ol class="app-steps">
+                <li>Descarga el archivo APK tocando el botón <strong>"Descargar APK"</strong> de la aplicación deseada.</li>
+                <li>Si tu navegador te advierte que el archivo puede ser dañino, selecciona <strong>"Descargar de todos modos"</strong>. Es normal en archivos APK.</li>
+                <li>Abre el archivo descargado desde tu gestor de archivos o desde la notificación de descarga.</li>
+                <li>Si aparece el aviso <strong>"Instalar aplicaciones desconocidas"</strong>, ve a <em>Ajustes → Seguridad → Instalar apps desconocidas</em> y permite la instalación desde tu navegador o gestor de archivos.</li>
+                <li>Toca <strong>"Instalar"</strong> y espera a que termine el proceso.</li>
+                <li>Abre la aplicación y ¡listo! Ya puedes empezar a usarla.</li>
+            </ol>
+            <div class="legal-highlight" style="margin-top:20px">
+                <strong><i class="fas fa-shield-alt"></i> Nota de seguridad:</strong>
+                Estas aplicaciones son distribuidas oficialmente por <strong>LD SmartLab</strong> a través de GitHub Releases. Por seguridad, descarga siempre los APK desde esta página y no desde enlaces de terceros.
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER SIMPLIFICADO ===== -->
+    <footer class="footer">
+        <div class="footer-bottom">
+            <div class="footer-bottom-content">
+                <p class="copyright-line">
+                    &copy; <span id="currentYear">2026</span> <strong>LD SmartLab</strong>. Todos los derechos reservados.
+                </p>
+                <p class="copyright-line small">
+                    <a href="index.html">Inicio</a> &nbsp;|&nbsp;
+                    <a href="legal/politica-privacidad.html">Política de Privacidad</a> &nbsp;|&nbsp;
+                    <a href="legal/terminos-servicio.html">Términos de Servicio</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
