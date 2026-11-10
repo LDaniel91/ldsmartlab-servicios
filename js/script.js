@@ -81,6 +81,7 @@ function getServiceRating(serviceId) {
 // ============================================================
 function renderServices() {
     const grid = document.getElementById('servicesGrid');
+    if (!grid) return;   // ← GUARD: no existe en descargas.html
     grid.innerHTML = services.map((service, index) => {
         const rating = getServiceRating(service.id);
         let ratingHTML = '';
@@ -120,6 +121,7 @@ function renderServices() {
 // ============================================================
 function renderTestimonials() {
     const grid = document.getElementById('testimonialsGrid');
+    if (!grid) return;   // ← GUARD
     grid.innerHTML = testimonials.map((t, index) =>
         `<div class="testimonial-card animate" style="animation-delay:${index * 0.05}s">
             <div class="stars">${'<i class="fas fa-star"></i>'.repeat(t.rating)}</div>
@@ -225,12 +227,14 @@ function addToCart(serviceId, btn) {
     cart.push({ ...service });
     saveCart();
     updateCartUI();
-    btn.innerHTML = '<i class="fas fa-check"></i> Agregado';
-    btn.classList.add('added');
-    setTimeout(() => {
-        btn.innerHTML = '<i class="fas fa-cart-plus"></i> Agregar';
-        btn.classList.remove('added');
-    }, 2000);
+    if (btn) {
+        btn.innerHTML = '<i class="fas fa-check"></i> Agregado';
+        btn.classList.add('added');
+        setTimeout(() => {
+            btn.innerHTML = '<i class="fas fa-cart-plus"></i> Agregar';
+            btn.classList.remove('added');
+        }, 2000);
+    }
     showToast(`${service.name} agregado al carrito`);
 }
 
@@ -250,6 +254,8 @@ function updateCartUI() {
     const itemsContainer = document.getElementById('cartItems');
     const totalEl = document.getElementById('cartTotal');
     const checkoutBtn = document.getElementById('checkoutBtn');
+    if (!count || !itemsContainer || !totalEl || !checkoutBtn) return;   // ← GUARD
+
     count.textContent = cart.length;
     if (cart.length === 0) {
         itemsContainer.innerHTML = `<div class="cart-empty"><i class="fas fa-shopping-basket"></i><p>Tu carrito está vacío</p><p style="font-size:0.85rem;margin-top:10px">Agrega servicios para comenzar</p></div>`;
@@ -273,14 +279,20 @@ function updateCartUI() {
 }
 
 function openCart() {
-    document.getElementById('cartOverlay').classList.add('active');
-    document.getElementById('cartSidebar').classList.add('active');
+    const overlay = document.getElementById('cartOverlay');
+    const sidebar = document.getElementById('cartSidebar');
+    if (!overlay || !sidebar) return;
+    overlay.classList.add('active');
+    sidebar.classList.add('active');
     document.body.style.overflow = 'hidden';
 }
 
 function closeCart() {
-    document.getElementById('cartOverlay').classList.remove('active');
-    document.getElementById('cartSidebar').classList.remove('active');
+    const overlay = document.getElementById('cartOverlay');
+    const sidebar = document.getElementById('cartSidebar');
+    if (!overlay || !sidebar) return;
+    overlay.classList.remove('active');
+    sidebar.classList.remove('active');
     document.body.style.overflow = '';
 }
 
@@ -288,6 +300,7 @@ function openCheckout() {
     if (cart.length === 0) return;
     closeCart();
     const summary = document.getElementById('orderSummary');
+    if (!summary) return;
     const total = cart.reduce((sum, item) => sum + item.price, 0);
     summary.innerHTML =
         `<h4><i class="fas fa-receipt"></i> Resumen del Pedido</h4>` +
@@ -295,12 +308,14 @@ function openCheckout() {
             `<div class="order-item"><span>${item.name}</span><span>$${item.price.toFixed(2)} ${item.currency}</span></div>`
         ).join('') +
         `<div class="order-total"><span>TOTAL:</span><span>$${total.toFixed(2)} CUP</span></div>`;
-    document.getElementById('checkoutModal').classList.add('active');
+    const modal = document.getElementById('checkoutModal');
+    if (modal) modal.classList.add('active');
     document.body.style.overflow = 'hidden';
 }
 
 function closeCheckout() {
-    document.getElementById('checkoutModal').classList.remove('active');
+    const modal = document.getElementById('checkoutModal');
+    if (modal) modal.classList.remove('active');
     document.body.style.overflow = '';
 }
 
@@ -404,6 +419,7 @@ function handleContactSubmit(e) {
 // ============================================================
 function showToast(msg, type = 'success') {
     const toast = document.getElementById('toast');
+    if (!toast) { alert(msg); return; }   // fallback si no existe el toast
     const msgEl = document.getElementById('toastMessage');
     const icon = toast.querySelector('i');
     msgEl.textContent = msg;
@@ -422,10 +438,10 @@ function toggleTheme() {
     const icon = document.querySelector('#themeToggle .switch-thumb i');
     const label = document.querySelector('#themeToggle .switch-label');
     if (document.body.classList.contains('light-mode')) {
-        icon.className = 'fas fa-sun';
+        if (icon) icon.className = 'fas fa-sun';
         if (label) label.textContent = 'OFF';
     } else {
-        icon.className = 'fas fa-moon';
+        if (icon) icon.className = 'fas fa-moon';
         if (label) label.textContent = 'ON';
     }
     localStorage.setItem('ldsmartlab_theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
@@ -463,6 +479,7 @@ function initScrollAnimations() {
 
 function initNavbar() {
     const navbar = document.getElementById('navbar');
+    if (!navbar) return;   // ← GUARD
     window.addEventListener('scroll', () => {
         if (window.scrollY > 50) navbar.classList.add('scrolled');
         else navbar.classList.remove('scrolled');
@@ -487,6 +504,7 @@ function initParticles() {
 
 function toggleMobileMenu() {
     const links = document.querySelector('.nav-links');
+    if (!links) return;
     if (links.style.display === 'flex') {
         links.style.display = 'none';
     } else {
@@ -541,6 +559,14 @@ document.addEventListener('DOMContentLoaded', () => {
     initParticles();
     initFooterDates();
     loadTheme();
-    document.getElementById('themeToggle').addEventListener('click', toggleTheme);
-    localStorage.setItem('ldsmartlab_services_cache', JSON.stringify(services));
+
+    const themeBtn = document.getElementById('themeToggle');
+    if (themeBtn) themeBtn.addEventListener('click', toggleTheme);   // ← GUARD
+
+    // Guardar servicios en cache para el panel admin
+    try {
+        localStorage.setItem('ldsmartlab_services_cache', JSON.stringify(services));
+    } catch (e) {
+        console.warn('No se pudo guardar cache de servicios:', e);
+    }
 });
