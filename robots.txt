@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ldaniel91.github.io/ldsmartlab-servicios/sitemap.xml
