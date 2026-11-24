@@ -3,8 +3,6 @@
 // ============================================================
 const services = [
     { id: 1, name: "Reparación de Computadoras", description: "Diagnóstico y reparación completa de equipos de escritorio y laptops. Precio base sin cambio de piezas. Si se requiere cambio de piezas, el costo adicional se cotiza según el tipo de pieza. Incluye limpieza interna, optimización del sistema y garantía de 30 días.", price: 4500, currency: "CUP", image: "assets/img/reparacion-pc.jpg" },
-    { id: 2, name: "Instalación de Redes Empresariales", description: "Diseño e instalación de redes cableadas e inalámbricas para empresas de cualquier tamaño. Configuración de routers, switches, access points y cableado estructurado. Solución integral para conexiones de alta demanda, puede llegar hasta $120,000 CUP dependiendo de la complejidad (número de puntos, switches, etc.).", price: 80000, currency: "CUP", image: "assets/img/redes-empresariales.jpg" },
-    { id: 3, name: "Instalación de Redes Domésticas", description: "Instalación de redes WiFi para hogares, cobertura total y configuración de routers y repetidores. Ideal para mejorar la conectividad en tu casa.", price: 10000, currency: "CUP", image: "assets/img/redes-domesticas.jpg" },
     { id: 4, name: "Desarrollo Web Profesional", description: "Creación de sitios web modernos, responsivos y optimizados para SEO. El precio puede variar según la complejidad del proyecto. Incluye diseño personalizado, panel administrativo, hosting y dominio por un año.", price: 200000, currency: "CUP", image: "assets/img/desarrollo-web.jpg" },
     { id: 5, name: "Ciberseguridad Empresarial", description: "Auditoría de seguridad, protección contra malware, firewall, VPN, análisis de vulnerabilidades y capacitación en seguridad informática para tu equipo para un nivel de auditoria básica", price: 50000, currency: "CUP", image: "assets/img/ciberseguridad.jpg" },
     { id: 6, name: "Recuperación de Datos", description: "Recuperación profesional de archivos eliminados o dañados de discos duros, memorias USB, tarjetas SD y otros dispositivos de almacenamiento. (Para casos simples)", price: 10000, currency: "CUP", image: "assets/img/recuperacion-datos.jpg" },
@@ -16,6 +14,18 @@ const services = [
     { id: 12, name: "Asesoría y Diseño de Tesis", description: "Apoyo integral en la elaboración de tesis de grado y posgrado. Incluye asesoría metodológica, estructuración, análisis de datos, corrección de estilo y preparación para la defensa. Si es un paquete completo $15,000 CUP - básico $7,000 (informe de tesis y PowerPoint)", price: 7000, currency: "CUP", image: "assets/img/asesoria-tesis.jpg" },
     { id: 13, name: "Marketing Digital", description: "Estrategias de marketing para potenciar tu negocio en línea: gestión de redes sociales, publicidad en Google y Facebook, SEO, email marketing y análisis de métricas. El precio puede variar según el plan. (Si es un plan mensual, $20,000 CUP/Mes Si es un paquete semanal, $8,500 CUP/semanal.", price: 20000, currency: "CUP", image: "assets/img/marketing-digital.jpg" },
     { id: 14, name: "Consultoría y Capacitación en IA", description: "Instalación y configuración de herramientas de Inteligencia Artificial. Curso básico e intermedio sobre IA y sus aplicaciones en la vida cotidiana y empresarial. El precio puede variar según el nivel de capacitación. La capacitación en IA es un servicio de alta demanda. $20,000 CUP para el curso básico y $50,000 CUP para el intermedio.", price: 20000, currency: "CUP", image: "assets/img/consultoria-ia.jpg" }
+];
+// ============================================================
+//  SERVICIOS DESACTIVADOS TEMPORALMENTE
+//  Desactivados temporalmente por decisión de LDani: los servicios
+//  de redes no se presentan aún en la web. No se borran: quedan
+//  guardados aquí con sus precios y descripciones sin cambios.
+//  Para reactivarlos, basta con volver a poner sus objetos en
+//  const services (arriba) y quitarlos de este array.
+// ============================================================
+const disabledServices = [
+    { id: 2, name: "Instalación de Redes Empresariales", description: "Diseño e instalación de redes cableadas e inalámbricas para empresas de cualquier tamaño. Configuración de routers, switches, access points y cableado estructurado. Solución integral para conexiones de alta demanda, puede llegar hasta $120,000 CUP dependiendo de la complejidad (número de puntos, switches, etc.).", price: 80000, currency: "CUP", image: "assets/img/redes-empresariales.jpg" },
+    { id: 3, name: "Instalación de Redes Domésticas", description: "Instalación de redes WiFi para hogares, cobertura total y configuración de routers y repetidores. Ideal para mejorar la conectividad en tu casa.", price: 10000, currency: "CUP", image: "assets/img/redes-domesticas.jpg" },
 ];
 
 // ============================================================
