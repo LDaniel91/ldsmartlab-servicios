@@ -26,18 +26,9 @@
     <div class="admin-container" id="loginView">
         <div class="login-box">
             <h2><i class="fas fa-lock"></i> Acceso Restringido</h2>
-            <form onsubmit="adminLogin(event)">
-                <div class="form-group">
-                    <label><i class="fas fa-user"></i> Usuario</label>
-                    <input type="text" id="adminUser" placeholder="Usuario" autocomplete="off" required>
-                </div>
-                <div class="form-group">
-                    <label><i class="fas fa-key"></i> Contraseña</label>
-                    <input type="password" id="adminPass" placeholder="••••••••" autocomplete="off" required>
-                </div>
-                <button type="submit" class="submit-btn"><i class="fas fa-sign-in-alt"></i> Ingresar</button>
-            </form>
-            <p id="loginError" class="login-error"><i class="fas fa-exclamation-triangle"></i> Credenciales incorrectas</p>
+            <p class="login-error" style="display:block"><i class="fas fa-exclamation-triangle"></i> Acceso de administración desactivado temporalmente por seguridad.</p>
+            <p>Las credenciales anteriores estaban publicadas en el código y se eliminaron. Para acceder al panel, contacta con el administrador: WhatsApp +53 54693190 o correo ldsmartlabmipc@outlook.com.</p>
+            <p id="loginError" class="login-error" style="display:none"><i class="fas fa-exclamation-triangle"></i> Credenciales incorrectas</p>
             <p id="attemptsWarning" class="attempts-warning"></p>
         </div>
     </div>
@@ -103,11 +94,13 @@
         // ==========================================================
         //  CONFIGURACIÓN DE SEGURIDAD
         // ==========================================================
-        // Credenciales codificadas en Base64 (no visibles en texto plano)
-        // Usuario real: root  →  Base64: cm9vdA==
-        // Contraseña real: Admin2010.*  →  Base64: QWRtaW4yMDEwLio=
-        const _u = atob('cm9vdA==');
-        const _p = atob('QWRtaW4yMDEwLio=');
+        // El acceso de administración está desactivado temporalmente
+        // por seguridad: antes las credenciales estaban escritas en
+        // este archivo, en un repositorio público, y se eliminaron.
+        // No se guarda ninguna credencial en el código. Para volver
+        // a habilitar el acceso hay que usar un mecanismo seguro
+        // (por ejemplo, autenticación en servidor) y cambiar las
+        // credenciales que estaban publicadas.
 
         const MAX_ATTEMPTS = 5;
         const LOCKOUT_MINUTES = 15;
@@ -146,42 +139,13 @@
         // ==========================================================
         function adminLogin(e) {
             e.preventDefault();
-            if (isLocked()) return;
-
-            const user = document.getElementById('adminUser').value.trim();
-            const pass = document.getElementById('adminPass').value;
-
-            if (user === _u && pass === _p) {
-                // Login correcto
-                setAttempts({ count: 0, lockedUntil: 0 });
-                const token = btoa(Date.now() + '::' + Math.random() + '::' + _u);
-                sessionStorage.setItem('ldsmartlab_admin_session', token);
-                sessionStorage.setItem('ldsmartlab_admin_time', Date.now().toString());
-                showAdmin();
-                document.getElementById('loginError').style.display = 'none';
-                document.getElementById('attemptsWarning').style.display = 'none';
-                document.getElementById('adminPass').value = '';
-            } else {
-                // Login fallido
-                const a = getAttempts();
-                a.count++;
-                if (a.count >= MAX_ATTEMPTS) {
-                    a.lockedUntil = Date.now() + LOCKOUT_MINUTES * 60000;
-                    a.count = 0;
-                    setAttempts(a);
-                    isLocked();
-                } else {
-                    setAttempts(a);
-                    const err = document.getElementById('loginError');
-                    err.style.display = 'block';
-                    err.classList.remove('shake');
-                    void err.offsetWidth;
-                    err.classList.add('shake');
-                    document.getElementById('attemptsWarning').textContent =
-                        `⚠️ Intentos restantes: ${MAX_ATTEMPTS - a.count}`;
-                    document.getElementById('attemptsWarning').style.display = 'block';
-                }
-                document.getElementById('adminPass').value = '';
+            // Acceso desactivado temporalmente por seguridad.
+            // No hay credenciales en el código: el inicio de sesión
+            // no está disponible hasta habilitar un acceso seguro.
+            const err = document.getElementById('loginError');
+            if (err) {
+                err.textContent = '⛔ Acceso de administración desactivado temporalmente por seguridad. Contacta con el administrador.';
+                err.style.display = 'block';
             }
         }
 
@@ -189,16 +153,11 @@
         //  SESIÓN
         // ==========================================================
         function checkSession() {
-            const token = sessionStorage.getItem('ldsmartlab_admin_session');
-            const time = sessionStorage.getItem('ldsmartlab_admin_time');
-            if (!token || !time) return false;
-            const elapsed = (Date.now() - parseInt(time)) / 60000;
-            if (elapsed > SESSION_MINUTES) {
-                adminLogout();
-                return false;
-            }
-            sessionStorage.setItem('ldsmartlab_admin_time', Date.now().toString());
-            return true;
+            // Sesiones anteriores quedan invalidadas: el acceso está
+            // desactivado temporalmente por seguridad.
+            sessionStorage.removeItem('ldsmartlab_admin_session');
+            sessionStorage.removeItem('ldsmartlab_admin_time');
+            return false;
         }
 
         function adminLogout() {
@@ -334,10 +293,8 @@
         //  INICIALIZACIÓN
         // ==========================================================
         document.addEventListener('DOMContentLoaded', () => {
-            if (checkSession()) {
-                showAdmin();
-                setInterval(updateSessionInfo, 1000);
-            }
+            // El acceso está desactivado temporalmente por seguridad:
+            // no se restaura ninguna sesión anterior.
             ['click', 'keydown', 'mousemove'].forEach(evt => {
                 document.addEventListener(evt, () => {
                     if (sessionStorage.getItem('ldsmartlab_admin_session')) {
